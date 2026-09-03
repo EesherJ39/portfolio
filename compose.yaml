@@ -4,12 +4,13 @@ services:
   web:
     build:
       context: .
+      target: runtime
     image: eesher-portfolio:local
     container_name: eesher-portfolio
     restart: unless-stopped
     init: true
     ports:
-      - "127.0.0.1:3000:3000"
+      - "23601:3000"
     environment:
       NODE_ENV: production
       WRANGLER_SEND_METRICS: "false"

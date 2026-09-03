@@ -20,4 +20,4 @@ COPY --from=build /app ./
 
 EXPOSE 3000
 
-CMD ["pnpm", "exec", "wrangler", "dev", "--config", "dist/server/wrangler.json", "--ip", "0.0.0.0", "--port", "3000"]
+CMD ["pnpm", "exec", "vinext", "start", "--hostname", "0.0.0.0", "--port", "3000"]
