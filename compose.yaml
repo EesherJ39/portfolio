@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     init: true
     ports:
-      - "23601:3000"
+      - "127.0.0.1:23601:3000"
     environment:
       NODE_ENV: production
       WRANGLER_SEND_METRICS: "false"
