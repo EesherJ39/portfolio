@@ -1,6 +1,8 @@
 FROM node:22-bookworm-slim AS build
 
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    texlive-latex-base texlive-latex-recommended texlive-latex-extra lmodern poppler-utils
 RUN npm install --global pnpm@11.19.0
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./

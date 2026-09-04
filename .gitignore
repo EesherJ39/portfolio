@@ -37,3 +37,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Generated exclusively from resume/Eesher_Janda_Resume.tex
+/public/Eesher_Janda_Resume.pdf
+/public/resume-version.json

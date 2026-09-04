@@ -32,10 +32,14 @@ future work, not something this site pretends has already happened.
 
 ## Validate
 
+The resume is now generated from `resume/Eesher_Janda_Resume.tex`. See
+`resume/README.md` for the single-source workflow and required local tools.
+
 ```sh
+pnpm resume:build
 pnpm exec tsc --noEmit
 pnpm lint
-node --experimental-strip-types --test tests/portfolio.test.mjs
+node --experimental-strip-types --test tests/*.test.mjs
 pnpm build
 ```
 

@@ -1,0 +1,120 @@
+% Eesher Janda - SWE internship and co-op resume
+% Overleaf: compile with pdfLaTeX. Body text is 10pt (11pt article + \small).
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{iftex}
+\ifPDFTeX
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+\hypersetup{pdftitle={Eesher Janda - Resume},pdfauthor={Eesher Janda}}
+
+\pagestyle{empty}
+\urlstyle{same}
+\raggedright
+\raggedbottom
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+\newcommand{\resumeSubheading}[4]{%
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \small #2 \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{0pt}
+}
+\newcommand{\resumeProjectHeading}[3]{%
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+    \small\textbf{#1} $|$ \textit{#2} & \small #3 \\
+  \end{tabular*}\vspace{-3pt}
+}
+\newenvironment{resumeItems}{%
+  \begin{itemize}[leftmargin=0.18in,label=\textbullet,
+    itemsep=2pt,topsep=3pt,parsep=0pt,partopsep=0pt]\small
+}{\end{itemize}\vspace{1pt}}
+\newcommand{\resumeItem}[1]{\item #1}
+
+\begin{document}
+
+\begin{center}
+  {\fontsize{25}{28}\selectfont\bfseries Eesher Janda}\\[4pt]
+  \small (647) 509-4102 $|$
+  \href{mailto:eeshersjanda@gmail.com}{eeshersjanda@gmail.com} $|$
+  \href{https://www.linkedin.com/in/eesher-singh-janda-b8439434a/}{LinkedIn} $|$
+  \href{https://github.com/EesherJ39}{github.com/EesherJ39} $|$
+  \href{https://eesherj.com}{eesherj.com}
+\end{center}
+\vspace{-7pt}
+
+\section{Education}
+\resumeSubheading
+  {University of Guelph}{Guelph, ON}
+  {Bachelor of Science in Computer Science $|$ GPA: 3.8/4.0}{Expected May 2028}
+{\small
+  \textbf{Coursework:} Data Structures \& Algorithms, Operating Systems, Database Systems, Distributed Systems\\
+  \textbf{Honours:} Dean's Honour List (Fall 2024, Winter 2025)\par
+}
+
+\section{Experience}
+\resumeSubheading
+  {Codentrel}{Toronto, ON}
+  {Software Engineering Intern}{Jun 2025 - Sep 2025}
+\begin{resumeItems}
+  \resumeItem{Built a \textbf{React dashboard for 50+ KPIs}, replacing recurring Excel aggregation for internal analysts.}
+  \resumeItem{Cut PostgreSQL report \textbf{P95 latency from 12s to 6s} and increased throughput from \textbf{8 to 18 req/s} by removing N+1 queries and adding composite indexes.}
+  \resumeItem{Replaced 30-second polling with WebSockets and Redis pub/sub, reducing dashboard refresh latency to \textbf{sub-500ms}.}
+  \resumeItem{Owned drill-down views, date filters, and CSV export from scoping through release; built Jest/React Testing Library tests reaching \textbf{85\% coverage} and catching \textbf{8 pre-production defects}.}
+\end{resumeItems}
+
+\resumeSubheading
+  {Google Developer Groups on Campus - University of Guelph}{Guelph, ON}
+  {Volunteer and Hackathon Participant}{Sep 2023 - Present}
+\begin{resumeItems}
+  \resumeItem{Helped coordinate technical workshops and hackathons, then participated in team-based coding challenges and project demonstrations.}
+\end{resumeItems}
+
+\section{Projects}
+\resumeProjectHeading
+  {\href{https://github.com/EesherJ39/TriageCI}{\underline{TriageCI}}}
+  {TypeScript, Node.js, SQLite, Docker}{2026}
+\begin{resumeItems}
+  \resumeItem{Built a self-hosted service that groups CI failures and distinguishes \textbf{flaky tests from sustained regressions} using GitHub webhooks and JUnit reports.}
+  \resumeItem{Implemented signed-webhook verification, duplicate-delivery protection, and a bounded worker queue with backpressure; exposed results through a web dashboard and REST API.}
+  \resumeItem{Processed \textbf{375,000 test observations} in local 64-client stress tests at a median \textbf{12,261 observations/s}, with no processing failures.}
+\end{resumeItems}
+
+\resumeProjectHeading
+  {\href{https://github.com/EesherJ39/raft-kv}{\underline{RaftKV}}}
+  {Java, C11, JNI, Python, Docker}{2026}
+\begin{resumeItems}
+  \resumeItem{Built a fault-tolerant key-value store using \textbf{Raft consensus} for leader election and majority-committed replication across three nodes.}
+  \resumeItem{Implemented quorum-checked reads and snapshot recovery; added a \textbf{C11/JNI write-ahead log} with checksums and fsync-before-apply durability.}
+  \resumeItem{Tested leader crashes, network partitions, and duplicate delivery in \textbf{1,000 seeded fault scenarios}; measured \textbf{186\,ms~failover} in a local live-cluster test.}
+\end{resumeItems}
+
+\resumeProjectHeading
+  {\href{https://github.com/EesherJ39/SyncLab}{\underline{SyncLab}}}
+  {C\#, ASP.NET Core, React, TypeScript, AES-GCM}{2026}
+\begin{resumeItems}
+  \resumeItem{Built an encrypted, offline-capable collaborative editor with React, ASP.NET Core, and a \textbf{CRDT} for concurrent edits.}
+  \resumeItem{Implemented persistent offline replay and an ordered WebSocket relay; repaired out-of-order and duplicate message handling.}
+  \resumeItem{Verified replica convergence across \textbf{200 randomized trials} covering \textbf{250,000 replica-operation observations}, including temporary message loss and duplicates.}
+\end{resumeItems}
+
+\section{Technical Skills}
+{\small
+  \textbf{Languages:} Java, C, C++, C\#, Python, TypeScript/JavaScript, SQL\\
+  \textbf{Frameworks \& Testing:} React, ASP.NET Core, Node.js, Jest, React Testing Library, Vitest\\
+  \textbf{Data \& Tools:} PostgreSQL, SQLite, Redis, Docker, Linux/Unix, Git, GitHub Actions, CMake\par
+}
+
+\end{document}

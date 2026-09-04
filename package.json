@@ -6,8 +6,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
+    "dev": "node scripts/build-resume.mjs && vinext dev",
+    "build": "node scripts/build-resume.mjs && vinext build",
+    "resume:build": "node scripts/build-resume.mjs",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
     "format": "oxfmt"
