@@ -13,6 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://eesherj.com'),
+  alternates: { canonical: '/' },
   title: 'Eesher Janda — Software Engineer',
   description:
     'Software engineer focused on distributed systems, developer infrastructure, and reliable full-stack software.',
@@ -46,7 +48,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Eesher Janda — Software Engineer',
-    description: 'Distributed systems, developer infrastructure, and measurable engineering results.',
+    description:
+      'Distributed systems, developer infrastructure, and measurable engineering results.',
     images: ['/eesher-janda-social.png'],
   },
   robots: { index: true, follow: true },
@@ -72,7 +75,7 @@ export default function RootLayout({
               name: 'Eesher Janda',
               jobTitle: 'Software Engineer',
               email: 'mailto:eeshersjanda@gmail.com',
-              alumniOf: {
+              affiliation: {
                 '@type': 'CollegeOrUniversity',
                 name: 'University of Guelph',
               },
