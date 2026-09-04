@@ -8,7 +8,6 @@ import {
   Network,
 } from 'lucide-react';
 import { TriageDemo } from './project-demos';
-import Link from 'next/link';
 
 const projects = [
   {
@@ -240,10 +239,10 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="project-links">
-                  <Link href={`/projects/${project.slug}`}>
+                  <a href={`/projects/${project.slug}`}>
                     Explore project{' '}
                     <ArrowUpRight size={16} aria-hidden="true" />
-                  </Link>
+                  </a>
                   <a href={project.href} target="_blank" rel="noreferrer">
                     Source code ↗
                   </a>

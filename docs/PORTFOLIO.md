@@ -54,3 +54,25 @@ those checks. Existing Ubuntu deployment instructions remain in `deploy/README.m
 - Repository-wide lint still reports pre-existing issues in unused bundled UI
   components and `hooks/use-mobile.ts`; those unrelated files were not changed.
 - This does not claim a browser interaction, mobile-device, or accessibility audit.
+
+## Navigation repair and portfolio link
+
+The live homepage reproduced a client-router failure on "Inside the analyzer":
+the `next/link` compatibility layer logged a prefetch TypeError and a navigation
+TypeError while keeping the visitor on the same page. The sample test selectors
+worked independently. Internal project navigation now uses native anchors, which
+load the server-rendered destination without relying on that client router.
+
+Validation of the rebuilt production preview:
+
+- Clicked "Inside the analyzer" from the homepage and reached TriageCI.
+- Added a failing run: observations changed from 8 to 9, transitions from 6 to 7,
+  and failure streak from 0 to 1. Reset restored the original values.
+- Followed the RaftKV cross-link, returned to All projects, and opened SyncLab.
+- Production build, TypeScript checks, and all 11 unit tests passed. The new
+  source-level guard complements these browser checks; it is not an end-to-end test.
+- Added the clickable portfolio URL to the resume header; verified one US Letter
+  page, seven expected PDF links, searchable text, and at least 10pt body text.
+
+These checks do not constitute a complete accessibility or mobile-device audit.
+Ubuntu still needs to pull and rebuild the new commit before the fix is live.

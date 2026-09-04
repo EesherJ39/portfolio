@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { analyze, type TestStatus } from '@/lib/demos/triage';
 import { SyncSession } from '@/lib/demos/sync';
@@ -134,9 +133,9 @@ export function TriageDemo({ compact = false }: { compact?: boolean }) {
             : 'Browser extraction of the classification logic. Uses the latest 64 sample observations; displays the last 16. Selecting a test resets its sample. The full-service same-commit evidence, ingestion, storage, and clustering are not running here.'}
         </p>
         {compact && (
-          <Link className="text-link" href="/projects/triageci">
+          <a className="text-link" href="/projects/triageci">
             Inside the analyzer <span aria-hidden="true">↗</span>
-          </Link>
+          </a>
         )}
       </div>
     </div>

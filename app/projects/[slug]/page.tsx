@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   projects,
@@ -47,11 +46,11 @@ export default async function ProjectPage({ params }: Props) {
         Skip to demonstration
       </a>
       <header className="site-header">
-        <Link className="wordmark" href="/">
+        <a className="wordmark" href="/">
           EJ<span>.</span>
-        </Link>
+        </a>
         <nav aria-label="Project navigation">
-          <Link href="/#work">All projects</Link>
+          <a href="/#work">All projects</a>
           <a href="#evidence">Evidence</a>
         </nav>
         <a
@@ -65,9 +64,9 @@ export default async function ProjectPage({ params }: Props) {
       </header>
       <article>
         <div className="case-hero">
-          <Link className="back-link" href="/#work">
+          <a className="back-link" href="/#work">
             ← Selected work
-          </Link>
+          </a>
           <p className="kicker">{project.category} / Personal project</p>
           <h1>
             {project.name}
@@ -206,10 +205,10 @@ export default async function ProjectPage({ params }: Props) {
             {Object.entries(projects)
               .filter(([key]) => key !== slug)
               .map(([key, item]) => (
-                <Link key={key} href={`/projects/${key}`}>
+                <a key={key} href={`/projects/${key}`}>
                   <span>{item.category}</span>
                   <strong>{item.name} ↗</strong>
-                </Link>
+                </a>
               ))}
           </nav>
         </div>
@@ -225,7 +224,7 @@ export default async function ProjectPage({ params }: Props) {
           <a href="/Eesher_Janda_Resume.pdf" target="_blank" rel="noreferrer">
             View résumé ↗
           </a>
-          <Link href="/#work">All projects</Link>
+          <a href="/#work">All projects</a>
         </div>
       </section>
     </main>

@@ -111,3 +111,13 @@ test('Resume is a real PDF and portfolio preserves loopback-only hosting', () =>
     /127\.0\.0\.1:23601:3000/,
   );
 });
+
+test('Case-study navigation uses native links, not the failing client router', () => {
+  for (const path of ['app/page.tsx', 'app/project-demos.tsx', 'app/projects/[slug]/page.tsx']) {
+    const source = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+    assert.doesNotMatch(source, /from ['"]next\/link['"]|<Link\b/);
+    assert.match(source, /<a\s/);
+  }
+  const demo = readFileSync(new URL('../app/project-demos.tsx', import.meta.url), 'utf8');
+  assert.match(demo, /<a className="text-link" href="\/projects\/triageci">/);
+});
