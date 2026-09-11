@@ -121,3 +121,10 @@ test('Case-study navigation uses native links, not the failing client router', (
   const demo = readFileSync(new URL('../app/project-demos.tsx', import.meta.url), 'utf8');
   assert.match(demo, /<a className="text-link" href="\/projects\/triageci">/);
 });
+
+test('Short resume routes redirect to the canonical generated PDF', () => {
+  const config = readFileSync(new URL('../next.config.ts', import.meta.url), 'utf8');
+  assert.match(config, /return \['\/resume', '\/cv'\]\.map/);
+  assert.match(config, /destination: '\/Eesher_Janda_Resume\.pdf'/);
+  assert.match(config, /permanent: false/);
+});

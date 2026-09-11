@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
       headers: [{ key: 'Cache-Control', value: 'no-store' }],
     }));
   },
+  async redirects() {
+    return ['/resume', '/cv'].map((source) => ({
+      source,
+      destination: '/Eesher_Janda_Resume.pdf',
+      permanent: false,
+    }));
+  },
 };
 
 export default nextConfig;
