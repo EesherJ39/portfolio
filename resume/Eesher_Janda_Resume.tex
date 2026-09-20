@@ -70,10 +70,10 @@
   {Codentrel}{Mississauga, ON}
   {Software Engineering Intern}{May 2026 - Aug 2026}
 \begin{resumeItems}
-  \resumeItem{Reduced manual reporting effort by \textbf{75\%} and saved \textbf{10 staff hours per week} for \textbf{15+ internal users} by building a HubSpot CRM and React dashboard that automated \textbf{10 recurring workflows} and consolidated \textbf{50+ KPIs}.}
-  \resumeItem{Halved PostgreSQL report \textbf{P95 latency from 12s to 6s} and increased throughput by \textbf{125\%, from 8 to 18 req/s}, by eliminating N+1 queries and adding composite indexes.}
+  \resumeItem{Reduced manual reporting effort by \textbf{75\%, saving 10 staff hours per week}, for 15+ internal users by building a HubSpot CRM and React dashboard that automated 10 recurring workflows and consolidated 50+ KPIs.}
+  \resumeItem{Halved PostgreSQL report \textbf{P95 latency from 12s to 6s while increasing throughput by 125\%}, from 8 to 18 req/s, by eliminating N+1 queries and adding composite indexes.}
   \resumeItem{Reduced dashboard refresh latency by \textbf{over 98\%, from 30-second polling to sub-500ms updates}, by implementing WebSockets and Redis pub/sub.}
-  \resumeItem{Delivered drill-down views, date filters, and CSV export with \textbf{100\% test coverage}, catching \textbf{8 pre-production defects} by driving Jira tickets through Playwright testing, code review, and Agile release.}
+  \resumeItem{Delivered drill-down views, date filters, and CSV export while \textbf{maintaining 100\% test coverage and catching 8 pre-production defects} by driving Jira tickets through Playwright testing, code review, and Agile release.}
 \end{resumeItems}
 
 \resumeSubheading
@@ -90,26 +90,26 @@
   {TypeScript, Node.js, SQLite, Docker}{2026}
 \begin{resumeItems}
   \resumeItem{Achieved \textbf{100\% detection of all 5 seeded flaky tests and 3 sustained regressions} in each of three local benchmark runs by analyzing GitHub webhook and JUnit pass/fail histories in TypeScript, Node.js, and SQLite.}
-  \resumeItem{Processed \textbf{375,000 test observations with zero failures} and deduplicated \textbf{300 replayed deliveries} by implementing signed-webhook verification, content-bound idempotency, and a bounded worker queue with backpressure.}
-  \resumeItem{Sustained a median \textbf{28,051 observations/s} with \textbf{64.7ms P95 request latency} across three local stress runs by using transactional SQLite WAL ingestion, four workers, and 64 concurrent clients.}
+  \resumeItem{Processed \textbf{375,000 test observations with zero failures} and deduplicated 300 replayed deliveries by implementing signed-webhook verification, content-bound idempotency, and a bounded worker queue with backpressure.}
+  \resumeItem{Sustained a median \textbf{28,051 observations/s with 64.7ms P95 request latency} across three local stress runs by using transactional SQLite WAL ingestion, four workers, and 64 concurrent clients.}
 \end{resumeItems}
 
 \resumeProjectHeading
   {\resumelink{https://github.com/EesherJ39/raft-kv}{RaftKV}}
   {Java, C11, JNI, Python, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Maintained convergence across \textbf{1,000 fault scenarios}, \textbf{21,621 committed writes}, and \textbf{17,643 duplicate deliveries} by implementing Raft elections and majority replication across three nodes.}
-  \resumeItem{Passed \textbf{8/8 protocol tests} and \textbf{5/5 linearizability checks}, including snapshot recovery and corrupt-state detection, by implementing quorum-checked reads and a checksummed \textbf{C11/JNI write-ahead log} with fsync-before-apply.}
-  \resumeItem{Achieved \textbf{186\,ms observed failover} in a live three-node cluster and validated recovery across \textbf{1,000 seeded fault scenarios} by testing leader crashes, network partitions, duplicate delivery, and restart catch-up.}
+  \resumeItem{Maintained \textbf{convergence across 1,000 fault scenarios} covering 21,621 committed writes and 17,643 duplicate deliveries by implementing Raft elections and majority replication across three nodes.}
+  \resumeItem{Passed \textbf{8/8 protocol tests and 5/5 linearizability checks}, including snapshot recovery and corrupt-state detection, by implementing quorum-checked reads and a checksummed C11/JNI write-ahead log with fsync-before-apply.}
+  \resumeItem{Achieved \textbf{186\,ms observed failover} in a live three-node cluster and validated recovery across 1,000 seeded fault scenarios by testing leader crashes, network partitions, duplicate delivery, and restart catch-up.}
 \end{resumeItems}
 
 \resumeProjectHeading
   {\resumelink{https://github.com/EesherJ39/SyncLab}{SyncLab}}
   {C\#, ASP.NET Core, React, TypeScript, AES-GCM}{2026}
 \begin{resumeItems}
-  \resumeItem{Verified AES-256-GCM correctness across \textbf{30,000 encrypt/decrypt operations with zero mismatches}, sustaining a median \textbf{23,040 round trips/s} on 256-byte payloads through client-side Web Crypto encryption.}
+  \resumeItem{Verified AES-256-GCM correctness across \textbf{30,000 encrypt/decrypt operations with zero mismatches at 23,040 round trips/s} on 256-byte payloads through client-side Web Crypto encryption.}
   \resumeItem{Delivered \textbf{20,000 ordered client messages across 10 concurrent clients in 131ms}, with zero missing or duplicate deliveries, by serializing per-room WebSocket broadcasts in ASP.NET Core.}
-  \resumeItem{Converged \textbf{5 replicas across 250,000 operations} despite \textbf{20\% temporary loss and 10\% duplicate delivery} by applying CRDT operations idempotently and replaying missing updates after reconnect.}
+  \resumeItem{Achieved \textbf{convergence across 5 replicas and 250,000 operations} despite 20\% temporary loss and 10\% duplicate delivery by applying CRDT operations idempotently and replaying missing updates after reconnect.}
 \end{resumeItems}
 
 \section{Technical Skills}
