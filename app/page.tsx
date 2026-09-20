@@ -19,7 +19,7 @@ const projects = [
     result: '12,261',
     unit: 'observations / second · local median',
     evidence:
-      '375,000 observations processed across three local 64-client stress runs with zero processing failures. Detected every seeded flaky test and regression in all three runs.',
+      '375,000 observations processed across three local 64-client stress runs with zero processing failures. Detected all five seeded flaky tests and three sustained regressions in every run.',
     details: [
       'HMAC-authenticated, idempotent ingestion',
       'Bounded worker queue with backpressure',
@@ -134,7 +134,7 @@ export default function Home() {
             crash-recoverable storage, and offline collaboration.
           </p>
           <p className="hero-education">
-            University of Guelph · B.Sc. Computer Science · May 2028
+            University of Guelph · Computing, Computer Science · Business minor · May 2028
           </p>
           <p className="availability">
             Seeking software engineering internships & co-ops
@@ -171,8 +171,8 @@ export default function Home() {
 
       <section className="proof-strip" aria-label="Profile highlights">
         <div>
-          <strong>3.8 / 4.0</strong>
-          <span>GPA · University of Guelph</span>
+          <strong>10 hrs/wk</strong>
+          <span>staff time saved · Codentrel internship</span>
         </div>
         <div>
           <strong>375K</strong>
@@ -262,26 +262,29 @@ export default function Home() {
           <div className="experience-meta">
             <p>Codentrel</p>
             <span>Software Engineering Intern</span>
-            <time>Jun — Sep 2025</time>
+            <time>May — Aug 2026</time>
           </div>
           <div className="experience-content">
-            <h3>Reporting in half the time.</h3>
+            <h3>Reporting with less manual work.</h3>
             <p>
-              Built a React analytics dashboard for <strong>50+ KPIs</strong>,
-              replacing recurring Excel aggregation for internal analysts.
-              Removed N+1 queries and added PostgreSQL composite indexes to cut
-              report P95 latency from <strong>12 seconds to 6</strong>.
+              Built a HubSpot CRM and React dashboard for{' '}
+              <strong>15+ internal users</strong>, automating{' '}
+              <strong>10 recurring workflows</strong> and consolidating{' '}
+              <strong>50+ KPIs</strong>. The system reduced manual reporting
+              effort by <strong>75%</strong> and saved approximately{' '}
+              <strong>10 staff hours per week</strong>.
             </p>
             <p className="ownership">
-              Owned drill-down views, date filters, and CSV export from scoping
-              through release. Added WebSockets with Redis pub/sub and a
-              Jest/React Testing Library suite reaching 85% coverage.
+              Delivered drill-down views, date filters, and CSV export from
+              Jira ticket through Agile release. Added WebSockets with Redis
+              pub/sub and Playwright testing that maintained 100% coverage and
+              caught eight pre-production defects.
             </p>
             <div className="impact-grid">
               <div>
-                <strong>2.25×</strong>
+                <strong>125%</strong>
                 <span>
-                  report throughput
+                  higher throughput
                   <br />8 → 18 req/s
                 </span>
               </div>
@@ -319,16 +322,16 @@ export default function Home() {
           <p className="section-index">03 / About</p>
           <h2>Beyond the code.</h2>
           <p>
-            I study Computer Science at the University of Guelph, where I’ve
-            earned a 3.8 GPA and Dean’s Honour List recognition. I’m most drawn
-            to software where correctness, performance, and clear reasoning all
-            matter.
+            I study Computer Science with a minor in Business at the University
+            of Guelph, where I’ve earned Dean’s Honour List recognition. I’m
+            most drawn to software where correctness, performance, and clear
+            reasoning all matter.
           </p>
           <p>
             As a volunteer with{' '}
             <strong>Google Developer Groups on Campus at Guelph</strong>, I help
-            coordinate technical workshops and hackathons, then participate in
-            team-based coding challenges and project demonstrations.
+            coordinate web-development workshops and mentor participants as
+            they build and deploy personal portfolio websites.
           </p>
           <p>
             I enjoy the full engineering process: understanding the problem,
@@ -361,7 +364,7 @@ export default function Home() {
             <Mail size={17} aria-hidden="true" /> Email me
           </a>
           <a
-            href="https://www.linkedin.com/in/eesher-singh-janda-b8439434a"
+            href="https://www.linkedin.com/in/eesherjanda/"
             target="_blank"
             rel="noreferrer"
           >
