@@ -70,11 +70,11 @@
   {Codentrel}{Mississauga, ON}
   {Software Engineering Intern}{Jan 2026 - Aug 2026}
 \begin{resumeItems}
-  \resumeItem{Collaborated with internal stakeholders to build a custom CRM and React dashboard for 15+ users, automating 10 recurring workf{}lows and consolidating 50+ KPIs to reduce manual reporting by \textbf{75\%} and save 10 staf{}f hours per week.}
-  \resumeItem{Cut report response time \textbf{from 12 to 6 seconds} and increased capacity by 125\%, from 8 to 18 requests per second, by removing duplicate database queries and improving PostgreSQL indexes.}
+  \resumeItem{Partnered with stakeholders to build a custom CRM and React dashboard for Codentrel, a modular business platform spanning CRM, HR, payroll, and operations; automated 10 workf{}lows across 50+ KPIs for 15+ users, cutting manual reporting by \textbf{75\%} and saving 10 staf{}f hours per week.}
+  \resumeItem{Cut report response time \textbf{from 12 to 6 seconds} and more than doubled capacity from 8 to 18 requests per second by removing duplicate database queries and improving PostgreSQL indexes.}
   \resumeItem{Made dashboard data update nearly instantly, cutting refresh time by over 98\% \textbf{from 30 seconds to under 500ms} by replacing repeated polling with WebSockets and Redis.}
   \resumeItem{Shipped a more reliable beta experience by resolving \textbf{50+ user-reported issues} in the interface and data-loading f{}lows and delivering drill-down reports, date f{}ilters, and CSV exports.}
-  \resumeItem{Prevented \textbf{8 defects from reaching production} and preserved 100\% coverage of released dashboard features by creating 60+ Playwright test suites, running them through GitHub Actions, and automating deployments to AWS ECS.}
+  \resumeItem{Prevented \textbf{2 defects from reaching production} and preserved 100\% coverage of released dashboard features by creating 60+ Playwright test suites, running them through GitHub Actions, and automating deployments to AWS ECS.}
 \end{resumeItems}
 
 \resumeSubheading
@@ -90,7 +90,7 @@
   {\resumelink{https://github.com/EesherJ39/TriageCI}{TriageCI}}
   {TypeScript, Node.js, SQLite, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Built a CI reliability platform that helps development teams identify unreliable tests and recurring regressions before they disrupt releases.}
+  \resumeItem{Built a CI reliability platform that f{}lags unreliable tests and recurring regressions before release.}
   \resumeItem{Achieved \textbf{100\% detection} of all 5 seeded f{}laky tests and 3 sustained regressions across three benchmark runs by analyzing GitHub and JUnit test history with TypeScript, Node.js, and SQLite.}
   \resumeItem{Processed \textbf{375,000 test results with zero failures} at approximately 28K results per second by combining authenticated webhooks, duplicate-event protection, and controlled background processing.}
 \end{resumeItems}
@@ -99,9 +99,9 @@
   {\resumelink{https://github.com/EesherJ39/raft-kv}{RaftKV}}
   {Java, C11, JNI, Python, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Built a fault-tolerant key-value database that elects a leader and replicates writes to keep stored data available during server failures.}
-  \resumeItem{Kept all three nodes consistent across \textbf{1,000 simulated failures} and passed all 13 protocol and consistency checks by using Raft leader election, majority replication, and quorum reads.}
-  \resumeItem{Restored service in \textbf{186\,ms after a leader failure} by implementing automatic leader re-election and testing server crashes, network partitions, duplicate messages, and restarts.}
+  \resumeItem{Built a fault-tolerant key-value database that elects a leader and replicates writes during server failures.}
+  \resumeItem{Kept all three nodes consistent across \textbf{1,000 simulated failures} and passed all 13 protocol and consistency checks using the Raft leader-election algorithm, majority replication, and reads verif{}ied by most nodes.}
+  \resumeItem{Restored service in \textbf{186\,ms} after terminating the active leader in a live three-process cluster, then verif{}ied automatic re-election, post-failure writes, and restart catch-up.}
 \end{resumeItems}
 
 \resumeProjectHeading
@@ -110,7 +110,7 @@
 \begin{resumeItems}
   \resumeItem{Built an end-to-end encrypted collaboration app that lets users edit in real time or of{}f{}line and automatically merges their changes when they reconnect.}
   \resumeItem{Verif{}ied \textbf{30,000 encryption and decryption operations with zero mismatches} using client-side AES-256-GCM.}
-  \resumeItem{Delivered \textbf{20,000 real-time messages in 130ms} with zero missing or duplicate deliveries and synchronized of{}f{}line edits after reconnection despite 20\% packet loss and 10\% duplicate delivery by ordering broadcasts and replaying missed updates.}
+  \resumeItem{Delivered \textbf{20,000 real-time messages in 130ms} with zero missing or duplicate deliveries and synchronized of{}f{}line edits after reconnection despite 20\% packet loss and 10\% duplicate delivery by ordering broadcasts and replaying updates.}
 \end{resumeItems}
 
 \section{Technical Skills}
