@@ -73,8 +73,8 @@
   \resumeItem{Collaborated with internal stakeholders to build a custom CRM and React dashboard for 15+ users, automating 10 recurring workf{}lows and consolidating 50+ KPIs to reduce manual reporting by \textbf{75\%} and save 10 staf{}f hours per week.}
   \resumeItem{Cut report response time \textbf{from 12 to 6 seconds} and increased capacity by 125\%, from 8 to 18 requests per second, by removing duplicate database queries and improving PostgreSQL indexes.}
   \resumeItem{Made dashboard data update nearly instantly, cutting refresh time by over 98\% \textbf{from 30 seconds to under 500ms} by replacing repeated polling with WebSockets and Redis.}
-  \resumeItem{Improved platform stability and usability by closing \textbf{50+ beta issues} across the interface and data-loading f{}lows while shipping drill-down views, date f{}ilters, and CSV exports.}
-  \resumeItem{Strengthened release quality by adding \textbf{80+ automated Playwright test suites} to GitHub Actions and automating AWS ECS deployments, preserving 100\% coverage of shipped dashboard features and catching 8 defects before release.}
+  \resumeItem{Shipped a more reliable beta experience by resolving \textbf{50+ user-reported issues} in the interface and data-loading f{}lows and delivering drill-down reports, date f{}ilters, and CSV exports.}
+  \resumeItem{Prevented \textbf{8 defects from reaching production} and preserved 100\% coverage of released dashboard features by creating 60+ Playwright test suites, running them through GitHub Actions, and automating deployments to AWS ECS.}
 \end{resumeItems}
 
 \resumeSubheading
@@ -99,7 +99,7 @@
   {\resumelink{https://github.com/EesherJ39/raft-kv}{RaftKV}}
   {Java, C11, JNI, Python, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Built a three-node key-value database that keeps data consistent and available when servers crash or lose network connectivity.}
+  \resumeItem{Built a fault-tolerant key-value database that elects a leader and replicates writes to keep stored data available during server failures.}
   \resumeItem{Kept all three nodes consistent across \textbf{1,000 simulated failures} and passed all 13 protocol and consistency checks by using Raft leader election, majority replication, and quorum reads.}
   \resumeItem{Restored service in \textbf{186\,ms after a leader failure} by implementing automatic leader re-election and testing server crashes, network partitions, duplicate messages, and restarts.}
 \end{resumeItems}
@@ -108,17 +108,17 @@
   {\resumelink{https://github.com/EesherJ39/SyncLab}{SyncLab}}
   {C\#, ASP.NET Core, React, TypeScript, AES-GCM}{2026}
 \begin{resumeItems}
-  \resumeItem{Built an encrypted real-time collaboration service that keeps edits synchronized across connected and of{}f{}line users.}
+  \resumeItem{Built an end-to-end encrypted collaboration app that lets users edit in real time or of{}f{}line and automatically merges their changes when they reconnect.}
   \resumeItem{Verif{}ied \textbf{30,000 encryption and decryption operations with zero mismatches} using client-side AES-256-GCM.}
-  \resumeItem{Delivered \textbf{20,000 messages in 130ms} with zero missing or duplicate deliveries and kept 5 replicas consistent across 250,000 operations despite 20\% loss and 10\% duplicates by ordering broadcasts and replaying missed updates.}
+  \resumeItem{Delivered \textbf{20,000 real-time messages in 130ms} with zero missing or duplicate deliveries and synchronized of{}f{}line edits after reconnection despite 20\% packet loss and 10\% duplicate delivery by ordering broadcasts and replaying missed updates.}
 \end{resumeItems}
 
 \section{Technical Skills}
 {\small
   \textbf{Languages:} Java, C, C++, C\#, Python, TypeScript/JavaScript, SQL\\
   \textbf{Frameworks \& APIs:} React, ASP.NET Core, Node.js, REST APIs, WebSockets\\
-  \textbf{Testing \& Delivery:} Jest, Playwright, Vitest, GitHub Actions (CI/CD), Docker, Git\\
-  \textbf{Data \& Systems:} PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix, CMake, HubSpot\par
+  \textbf{Testing \& Delivery:} Jest, Playwright, Vitest, GitHub Actions (CI/CD), AWS ECS, Docker, Git\\
+  \textbf{Data \& Systems:} PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix, CMake\par
 }
 
 \end{document}
