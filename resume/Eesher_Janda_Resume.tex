@@ -72,7 +72,7 @@
 \begin{resumeItems}
   \resumeItem{Collaborated with internal stakeholders to build a HubSpot CRM and React dashboard for 15+ users, automating 10 recurring workflows and consolidating 50+ KPIs to \textbf{reduce manual reporting by 75\% and save 10 staff hours per week}.}
   \resumeItem{Halved PostgreSQL report \textbf{P95 latency from 12s to 6s while increasing throughput by 125\%}, from 8 to 18 req/s, by eliminating N+1 queries and adding composite indexes.}
-  \resumeItem{Reduced dashboard refresh latency by \textbf{over 98\%, from 30-second polling to sub-500ms updates}, by implementing WebSockets and Redis pub/sub.}
+  \resumeItem{Cut dashboard data staleness by \textbf{over 98\%, from up to 30 seconds to under 500ms}, by replacing polling with WebSockets and Redis pub/sub.}
   \resumeItem{Delivered drill-down views, date filters, and CSV export while \textbf{maintaining 100\% test coverage across shipped dashboard features and catching 8 pre-production defects} through Playwright testing, code review, and Agile release.}
 \end{resumeItems}
 
@@ -90,14 +90,14 @@
   {TypeScript, Node.js, SQLite, Docker}{2026}
 \begin{resumeItems}
   \resumeItem{Achieved \textbf{100\% detection of all 5 seeded flaky tests and 3 sustained regressions} across three local benchmark runs by building a CI reliability platform that analyzes GitHub webhook and JUnit histories through a TypeScript/Node.js REST API backed by SQLite.}
-  \resumeItem{Processed \textbf{375,000 test observations with zero failures at 28,051 observations/s and 64.7ms P95 latency} by combining signed webhooks, idempotent delivery, SQLite WAL, and a bounded worker queue.}
+  \resumeItem{Processed \textbf{375,000 test observations with zero failures} across three local stress runs, sustaining a median 28,051 observations/s at 64.7ms P95 latency by combining signed webhooks, idempotent delivery, SQLite WAL, and a bounded worker queue.}
 \end{resumeItems}
 
 \resumeProjectHeading
   {\resumelink{https://github.com/EesherJ39/raft-kv}{RaftKV}}
   {Java, C11, JNI, Python, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Maintained \textbf{convergence across 1,000 fault scenarios and passed 8/8 protocol and 5/5 linearizability checks} by implementing Raft elections, majority replication, quorum reads, and a checksummed C11/JNI write-ahead log.}
+  \resumeItem{Maintained \textbf{convergence across 1,000 seeded fault scenarios and passed 8/8 protocol and 5/5 linearizability checks} by building a three-node replicated key-value store with Raft leader election, majority replication, quorum reads, and a checksummed C11/JNI write-ahead log.}
   \resumeItem{Achieved \textbf{186\,ms observed failover} in a live three-node cluster by implementing randomized election timeouts and majority-vote leader re-election, validated under leader crashes, network partitions, duplicate delivery, and restart catch-up.}
 \end{resumeItems}
 
@@ -105,8 +105,8 @@
   {\resumelink{https://github.com/EesherJ39/SyncLab}{SyncLab}}
   {C\#, ASP.NET Core, React, TypeScript, AES-GCM}{2026}
 \begin{resumeItems}
-  \resumeItem{Protected synchronized payloads with client-side AES-256-GCM, verifying \textbf{30,000 encrypt/decrypt operations with zero mismatches at 23,040 round trips/s} on 256-byte payloads.}
-  \resumeItem{Delivered \textbf{20,000 ordered messages across 10 clients in 131ms and convergence across 5 replicas and 250,000 operations} despite 20\% loss and 10\% duplicate delivery using serialized WebSocket broadcasts and idempotent CRDT replay.}
+  \resumeItem{Verified \textbf{30,000 encrypt/decrypt operations with zero mismatches} by building an encrypted real-time synchronization service with ASP.NET Core, React, WebSockets, CRDTs, and client-side AES-256-GCM.}
+  \resumeItem{Delivered \textbf{20,000 ordered messages across 10 concurrent clients in 131ms with zero missing or duplicate deliveries} and maintained convergence across 5 replicas and 250,000 operations despite 20\% loss and 10\% duplicate delivery by serializing WebSocket broadcasts and replaying idempotent CRDT updates.}
 \end{resumeItems}
 
 \section{Technical Skills}
