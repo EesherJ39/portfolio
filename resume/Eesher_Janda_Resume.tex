@@ -2,7 +2,7 @@
 % Compile with pdfLaTeX. Body text is 10pt (11pt article + \small).
 \documentclass[letterpaper,11pt]{article}
 
-\usepackage[margin=0.42in]{geometry}
+\usepackage[margin=0.50in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{titlesec}
@@ -24,7 +24,7 @@
 \setlength{\tabcolsep}{0pt}
 
 \titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
-\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
 
 \newcommand{\resumelink}[2]{\href{#1}{\underline{#2}}}
 \newcommand{\resumeSubheading}[4]{%
@@ -70,10 +70,10 @@
   {Codentrel}{Mississauga, ON}
   {Software Engineering Intern}{May 2026 - Aug 2026}
 \begin{resumeItems}
-  \resumeItem{Reduced manual reporting effort by \textbf{75\%, saving 10 staff hours per week}, for 15+ internal users by building a HubSpot CRM and React dashboard that automated 10 recurring workflows and consolidated 50+ KPIs.}
+  \resumeItem{Collaborated with internal stakeholders to build a HubSpot CRM and React dashboard for 15+ users, automating 10 recurring workflows and consolidating 50+ KPIs to \textbf{reduce manual reporting by 75\% and save 10 staff hours per week}.}
   \resumeItem{Halved PostgreSQL report \textbf{P95 latency from 12s to 6s while increasing throughput by 125\%}, from 8 to 18 req/s, by eliminating N+1 queries and adding composite indexes.}
   \resumeItem{Reduced dashboard refresh latency by \textbf{over 98\%, from 30-second polling to sub-500ms updates}, by implementing WebSockets and Redis pub/sub.}
-  \resumeItem{Delivered drill-down views, date filters, and CSV export while \textbf{maintaining 100\% test coverage and catching 8 pre-production defects} by driving Jira tickets through Playwright testing, code review, and Agile release.}
+  \resumeItem{Delivered drill-down views, date filters, and CSV export while \textbf{maintaining 100\% test coverage across shipped dashboard features and catching 8 pre-production defects} through Playwright testing, code review, and Agile release.}
 \end{resumeItems}
 
 \resumeSubheading
@@ -89,34 +89,32 @@
   {\resumelink{https://github.com/EesherJ39/TriageCI}{TriageCI}}
   {TypeScript, Node.js, SQLite, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Achieved \textbf{100\% detection of all 5 seeded flaky tests and 3 sustained regressions} in each of three local benchmark runs by analyzing GitHub webhook and JUnit pass/fail histories in TypeScript, Node.js, and SQLite.}
-  \resumeItem{Processed \textbf{375,000 test observations with zero failures} and deduplicated 300 replayed deliveries by implementing signed-webhook verification, content-bound idempotency, and a bounded worker queue with backpressure.}
-  \resumeItem{Sustained a median \textbf{28,051 observations/s with 64.7ms P95 request latency} across three local stress runs by using transactional SQLite WAL ingestion, four workers, and 64 concurrent clients.}
+  \resumeItem{Built a CI reliability platform with a REST API and live dashboard that achieved \textbf{100\% detection of all 5 seeded flaky tests and 3 sustained regressions} across three local benchmark runs.}
+  \resumeItem{Processed \textbf{375,000 test observations with zero failures at 28,051 observations/s and 64.7ms P95 latency} by combining signed webhooks, idempotent delivery, SQLite WAL, and a bounded worker queue.}
 \end{resumeItems}
 
 \resumeProjectHeading
   {\resumelink{https://github.com/EesherJ39/raft-kv}{RaftKV}}
   {Java, C11, JNI, Python, Docker}{2026}
 \begin{resumeItems}
-  \resumeItem{Maintained \textbf{convergence across 1,000 fault scenarios} covering 21,621 committed writes and 17,643 duplicate deliveries by implementing Raft elections and majority replication across three nodes.}
-  \resumeItem{Passed \textbf{8/8 protocol tests and 5/5 linearizability checks}, including snapshot recovery and corrupt-state detection, by implementing quorum-checked reads and a checksummed C11/JNI write-ahead log with fsync-before-apply.}
-  \resumeItem{Achieved \textbf{186\,ms observed failover} in a live three-node cluster and validated recovery across 1,000 seeded fault scenarios by testing leader crashes, network partitions, duplicate delivery, and restart catch-up.}
+  \resumeItem{Maintained \textbf{convergence across 1,000 fault scenarios and passed 8/8 protocol and 5/5 linearizability checks} by implementing Raft elections, majority replication, quorum reads, and a checksummed C11/JNI write-ahead log.}
+  \resumeItem{Achieved \textbf{186\,ms observed failover} in a live three-node cluster by validating recovery from leader crashes, network partitions, duplicate delivery, and restart catch-up.}
 \end{resumeItems}
 
 \resumeProjectHeading
   {\resumelink{https://github.com/EesherJ39/SyncLab}{SyncLab}}
   {C\#, ASP.NET Core, React, TypeScript, AES-GCM}{2026}
 \begin{resumeItems}
-  \resumeItem{Verified AES-256-GCM correctness across \textbf{30,000 encrypt/decrypt operations with zero mismatches at 23,040 round trips/s} on 256-byte payloads through client-side Web Crypto encryption.}
-  \resumeItem{Delivered \textbf{20,000 ordered client messages across 10 concurrent clients in 131ms}, with zero missing or duplicate deliveries, by serializing per-room WebSocket broadcasts in ASP.NET Core.}
-  \resumeItem{Achieved \textbf{convergence across 5 replicas and 250,000 operations} despite 20\% temporary loss and 10\% duplicate delivery by applying CRDT operations idempotently and replaying missing updates after reconnect.}
+  \resumeItem{Protected synchronized payloads with client-side AES-256-GCM, verifying \textbf{30,000 encrypt/decrypt operations with zero mismatches at 23,040 round trips/s} on 256-byte payloads.}
+  \resumeItem{Delivered \textbf{20,000 ordered messages across 10 clients in 131ms and convergence across 5 replicas and 250,000 operations} despite 20\% loss and 10\% duplicate delivery using serialized WebSocket broadcasts and idempotent CRDT replay.}
 \end{resumeItems}
 
 \section{Technical Skills}
 {\small
   \textbf{Languages:} Java, C, C++, C\#, Python, TypeScript/JavaScript, SQL\\
-  \textbf{Frameworks \& Testing:} React, ASP.NET Core, Node.js, Jest, Playwright, Vitest\\
-  \textbf{Data \& Tools:} PostgreSQL, SQLite, Redis, HubSpot, Docker, Linux/Unix, Git, GitHub Actions, CMake\par
+  \textbf{Frameworks \& APIs:} React, ASP.NET Core, Node.js, REST APIs, WebSockets\\
+  \textbf{Testing \& Delivery:} Jest, Playwright, Vitest, GitHub Actions (CI/CD), Docker, Git\\
+  \textbf{Data \& Systems:} PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix, CMake, HubSpot\par
 }
 
 \end{document}
