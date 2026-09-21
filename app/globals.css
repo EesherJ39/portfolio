@@ -457,6 +457,9 @@ a {
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
 }
+.experience-card + .experience-card {
+  margin-top: 44px;
+}
 .experience-meta {
   padding: 38px 38px 38px 0;
   border-right: 1px solid var(--line);
@@ -511,6 +514,9 @@ a {
   color: var(--muted);
   font-size: 0.7rem;
   line-height: 1.45;
+}
+.compact-impact-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .about-section {
@@ -709,6 +715,9 @@ footer a:hover {
   }
   .impact-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .compact-impact-grid {
+    grid-template-columns: 1fr;
   }
   .contact-actions {
     align-items: flex-start;

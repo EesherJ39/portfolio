@@ -134,7 +134,7 @@ export default function Home() {
             crash-recoverable storage, and offline collaboration.
           </p>
           <p className="hero-education">
-            University of Guelph · Computing, Computer Science · Business minor · May 2028
+            University of Guelph · Computing, Computer Science · Business minor · April 2028
           </p>
           <p className="availability">
             Seeking software engineering internships & co-ops
@@ -184,7 +184,7 @@ export default function Home() {
         </div>
         <div>
           <strong>12s → 6s</strong>
-          <span>report P95 latency · Codentrel internship</span>
+          <span>report response time · Codentrel internship</span>
         </div>
       </section>
 
@@ -262,23 +262,24 @@ export default function Home() {
           <div className="experience-meta">
             <p>Codentrel</p>
             <span>Software Engineering Intern</span>
-            <time>May — Aug 2026</time>
+            <time>Jan — Aug 2026</time>
           </div>
           <div className="experience-content">
-            <h3>Reporting with less manual work.</h3>
+            <h3>Turning operational data into faster decisions.</h3>
             <p>
-              Built a HubSpot CRM and React dashboard for{' '}
-              <strong>15+ internal users</strong>, automating{' '}
-              <strong>10 recurring workflows</strong> and consolidating{' '}
-              <strong>50+ KPIs</strong>. The system reduced manual reporting
-              effort by <strong>75%</strong> and saved approximately{' '}
+              Built a custom CRM and React dashboard for Codentrel&apos;s modular
+              workforce platform, serving <strong>15+ internal users</strong>,
+              automating <strong>10 workflows</strong>, and consolidating{' '}
+              <strong>50+ KPIs</strong>. The system cut reporting effort by{' '}
+              <strong>75%</strong> and saved{' '}
               <strong>10 staff hours per week</strong>.
             </p>
             <p className="ownership">
-              Delivered drill-down views, date filters, and CSV export from
-              Jira ticket through Agile release. Added WebSockets with Redis
-              pub/sub and Playwright testing that maintained 100% coverage and
-              caught eight pre-production defects.
+              Resolved <strong>50+ user-reported issues</strong>, added live
+              updates, and shipped drill-down reports, filters, and exports.
+              Built <strong>60+ Playwright test suites</strong> into GitHub
+              Actions and AWS ECS delivery, preventing{' '}
+              <strong>2 defects from reaching production</strong>.
             </p>
             <div className="impact-grid">
               <div>
@@ -291,7 +292,7 @@ export default function Home() {
               <div>
                 <strong>50%</strong>
                 <span>
-                  lower P95 latency
+                  faster report response
                   <br />
                   12s → 6s
                 </span>
@@ -305,12 +306,47 @@ export default function Home() {
                 </span>
               </div>
               <div>
-                <strong>8</strong>
+                <strong>2</strong>
                 <span>
                   defects caught
                   <br />
                   before production
                 </span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article className="experience-card">
+          <div className="experience-meta">
+            <p>Google Developer Groups on Campus</p>
+            <span>Volunteer &amp; Workshop Mentor</span>
+            <time>Sep 2024 — Present</time>
+          </div>
+          <div className="experience-content">
+            <h3>Helping students build for the web.</h3>
+            <p>
+              Coordinated <strong>10 hands-on workshops</strong> for
+              approximately <strong>100 participants</strong>, covering web
+              fundamentals, APIs, GitHub, and deployment.
+            </p>
+            <p className="ownership">
+              Mentored <strong>5 participants</strong> through live debugging
+              and one-on-one guidance as they built and deployed personal
+              portfolio websites with HTML, CSS, JavaScript, GitHub, and
+              Firebase.
+            </p>
+            <div className="impact-grid compact-impact-grid">
+              <div>
+                <strong>10</strong>
+                <span>web-development workshops coordinated</span>
+              </div>
+              <div>
+                <strong>~100</strong>
+                <span>participants reached</span>
+              </div>
+              <div>
+                <strong>5</strong>
+                <span>portfolio builders mentored</span>
               </div>
             </div>
           </div>
