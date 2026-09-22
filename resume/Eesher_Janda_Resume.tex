@@ -43,6 +43,11 @@
     itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt]\small
 }{\end{itemize}\vspace{0pt}}
 \newcommand{\resumeItem}[1]{\item #1}
+\newcommand{\resumeSkillRow}[2]{%
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}l >{\raggedleft\arraybackslash}X@{}}
+    #1 & #2
+  \end{tabularx}\vspace{-2pt}%
+}
 
 \begin{document}
 
@@ -61,7 +66,7 @@
   {University of Guelph}{Guelph, ON}
   {Bachelor of Computing in Computer Science $|$ Minor in Business}{Expected April 2028}
 {\small
-  \textbf{Coursework:} Data Structures \& Algorithms, Operating Systems, Database Systems, Distributed Systems\\
+  \textbf{Coursework:} Data Structures \& Algorithms, Operating Systems, Database Systems, Distributed Systems, Theory of Computation, Systems Analysis \& Design, Software Engineering\\
   \textbf{Honours:} Dean's Honour List (Fall 2024, Winter 2025)\par
 }
 
@@ -113,13 +118,13 @@
   \resumeItem{Delivered \textbf{20,000 real-time messages in 130ms} with zero missing or duplicate deliveries and synchronized of{}f{}line edits after reconnection despite 20\% packet loss and 10\% duplicate delivery by ordering broadcasts and replaying updates.}
 \end{resumeItems}
 
+\enlargethispage{24pt}
 \section{Technical Skills}
 {\small
-  \textbf{Programming Languages:} Java, C, C++, C\#, Python, TypeScript, JavaScript, SQL, HTML, CSS\\
-  \textbf{Frameworks \& APIs:} React, Node.js, ASP.NET Core, REST APIs, WebSockets\\
-  \textbf{Databases \& Observability:} PostgreSQL, SQLite, Redis, Prometheus\\
-  \textbf{Cloud \& DevOps:} AWS (ECS), Docker, GitHub Actions (CI/CD), Linux/Unix\\
-  \textbf{Testing \& Developer Tools:} Playwright, Jest, Vitest, Git, CMake\par
+  \resumeSkillRow{Programming Languages}{Java, Python, C/C++, C\#, JavaScript, TypeScript, SQL, HTML/CSS, Bash}
+  \resumeSkillRow{Frameworks / Libraries / APIs}{React, Next.js, Node.js, Express.js, ASP.NET Core, REST APIs, WebSockets}
+  \resumeSkillRow{Cloud / Databases / DevOps}{AWS (ECS), Docker, GitHub Actions, CI/CD, PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix}
+  \resumeSkillRow{Testing / Tools / Concepts}{Playwright, Jest, Vitest, Git, CMake, Agile/Scrum, TDD, SDLC, OOP, System Design, Distributed Systems}
 }
 
 \end{document}
