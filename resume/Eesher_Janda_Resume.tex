@@ -43,6 +43,11 @@
     itemsep=1pt,topsep=1pt,parsep=0pt,partopsep=0pt]\small
 }{\end{itemize}\vspace{0pt}}
 \newcommand{\resumeItem}[1]{\item #1}
+\newcommand{\resumeSkillRow}[2]{%
+  \begin{tabularx}{\textwidth}{@{}>{\bfseries}l >{\raggedleft\arraybackslash}X@{}}
+    #1 & #2
+  \end{tabularx}\vspace{-2pt}%
+}
 
 \begin{document}
 
@@ -115,10 +120,10 @@
 
 \section{Technical Skills}
 {\small
-  \textbf{Languages:} Java, C, C++, C\#, Python, TypeScript/JavaScript, SQL\\
-  \textbf{Frameworks \& APIs:} React, ASP.NET Core, Node.js, REST APIs, WebSockets\\
-  \textbf{Testing \& Delivery:} Jest, Playwright, Vitest, GitHub Actions (CI/CD), Git\\
-  \textbf{Cloud, Data \& Systems:} AWS (ECS), Docker, PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix, CMake\par
+  \resumeSkillRow{Languages}{Java, C, C++, C\#, Python, TypeScript/JavaScript, SQL}
+  \resumeSkillRow{Frameworks \& APIs}{React, ASP.NET Core, Node.js, REST APIs, WebSockets}
+  \resumeSkillRow{Testing \& Delivery}{Jest, Playwright, Vitest, GitHub Actions (CI/CD), AWS ECS, Docker, Git}
+  \resumeSkillRow{Cloud, Data \& Systems}{PostgreSQL, SQLite, Redis, Prometheus, Linux/Unix, CMake}
 }
 
 \end{document}
