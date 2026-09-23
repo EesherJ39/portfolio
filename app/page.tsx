@@ -262,21 +262,22 @@ export default function Home() {
           <div className="experience-meta">
             <p>Codentrel</p>
             <span>Software Engineering Intern</span>
-            <time>Jan — Aug 2026</time>
+            <time>May — Aug 2026</time>
           </div>
           <div className="experience-content">
             <h3>Turning operational data into faster decisions.</h3>
             <p>
-              Built a custom CRM and React dashboard for Codentrel&apos;s modular
-              workforce platform, serving <strong>15+ internal users</strong>,
+              Contributed to the development of a custom CRM and React dashboard
+              for Codentrel&apos;s modular workforce platform, serving{' '}
+              <strong>15+ internal users</strong>,
               automating <strong>10 workflows</strong>, and consolidating{' '}
               <strong>50+ KPIs</strong>. The system cut reporting effort by{' '}
               <strong>75%</strong> and saved{' '}
               <strong>10 staff hours per week</strong>.
             </p>
             <p className="ownership">
-              Resolved <strong>50+ user-reported issues</strong>, added live
-              updates, and shipped drill-down reports, filters, and exports.
+              Resolved <strong>50+ issues reported during beta testing</strong>,
+              added live updates, and shipped drill-down reports, filters, and exports.
               Built <strong>60+ Playwright test suites</strong> into GitHub
               Actions and AWS ECS delivery, preventing{' '}
               <strong>2 defects from reaching production</strong>.
