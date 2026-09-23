@@ -267,7 +267,7 @@ export default function Home() {
           <div className="experience-content">
             <h3>Turning operational data into faster decisions.</h3>
             <p>
-              Contributed to the development of a custom CRM and React dashboard
+              Contributed to the development of a custom CRM with a React dashboard
               for Codentrel&apos;s modular workforce platform, serving{' '}
               <strong>15+ internal users</strong>,
               automating <strong>10 workflows</strong>, and consolidating{' '}
@@ -331,10 +331,9 @@ export default function Home() {
               fundamentals, APIs, GitHub, and deployment.
             </p>
             <p className="ownership">
-              Mentored <strong>5 participants</strong> through live debugging
-              and one-on-one guidance as they built and deployed personal
-              portfolio websites with HTML, CSS, JavaScript, GitHub, and
-              Firebase.
+              Guided <strong>5 participants</strong> through building and deploying
+              personal portfolio websites, providing live debugging and one-on-one
+              support in HTML, CSS, JavaScript, GitHub, and Firebase.
             </p>
             <div className="impact-grid compact-impact-grid">
               <div>
