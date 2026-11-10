@@ -1,237 +1,424 @@
-import { projects, projectOrder, repoUrl } from '@/lib/projects';
-import { RaftFigure, SyncFigure, TriageFigure } from './figures';
-import { ArrowIcon, GitHubIcon, LinkedInIcon, MailIcon } from './icons';
-import { SectionNav } from './section-nav';
+import {
+  ArrowDown,
+  ArrowUpRight,
+  CircleCheck,
+  Code,
+  ContactRound,
+  Mail,
+  Network,
+} from 'lucide-react';
+import { TriageDemo } from './project-demos';
 
-const email = 'eeshersjanda@gmail.com';
-const linkedin = 'https://www.linkedin.com/in/eesherjanda/';
-const github = 'https://github.com/EesherJ39';
-
-const figures = {
-  triageci: <TriageFigure />,
-  raftkv: <RaftFigure />,
-  synclab: <SyncFigure />,
-};
-
-const roles = [
+const projects = [
   {
-    dates: 'May – Aug 2026',
-    title: 'Software Engineering Intern',
-    org: 'Codentrel',
-    place: 'Mississauga, ON',
-    points: [
-      'Worked on a React reporting dashboard for Codentrel’s internal CRM. Automating the recurring reports saved the team about 10 hours a week.',
-      'Removed duplicate PostgreSQL queries from the reporting path, which took it from 8 to 18 requests per second and cut response time from 12 seconds to 6.',
-      'Replaced the dashboard’s 30-second polling with live updates over WebSockets and Redis. New data now shows up in under half a second.',
-      'Fixed 50+ issues from beta testing, and added drill-down reports, date filters and CSV export.',
-      'Set up a CI gate in GitHub Actions with 60+ Playwright suites and automated deploys to AWS ECS. It caught two bugs before they reached production.',
+    number: '01',
+    name: 'TriageCI',
+    eyebrow: 'Developer infrastructure',
+    description:
+      'A self-hosted CI failure-intelligence service that turns noisy test failures into explainable flaky-test and regression signals.',
+    result: '12,261',
+    unit: 'observations / second · local median',
+    evidence:
+      '375,000 observations processed across three local 64-client stress runs with zero processing failures. Detected all five seeded flaky tests and three sustained regressions in every run.',
+    details: [
+      'HMAC-authenticated, idempotent ingestion',
+      'Bounded worker queue with backpressure',
+      'Transactional SQLite WAL storage',
+      'Prometheus metrics and GitHub webhooks',
     ],
-    tags: ['React', 'PostgreSQL', 'WebSockets', 'Redis', 'Playwright', 'AWS ECS'],
+    stack: ['TypeScript', 'Node.js', 'SQLite', 'Docker'],
+    slug: 'triageci',
+    href: 'https://github.com/EesherJ39/TriageCI',
+    accent: 'cobalt',
   },
   {
-    dates: 'Sep 2024 – Now',
-    title: 'Volunteer and Workshop Mentor',
-    org: 'Google Developer Groups on Campus, University of Guelph',
-    place: 'Guelph, ON',
-    points: [
-      'Helped run 10 hands-on web development workshops for about 100 students, covering frontend basics, APIs, GitHub and deployment.',
-      'Worked one-on-one with five students to build and deploy their own portfolio sites.',
+    number: '02',
+    name: 'RaftKV',
+    eyebrow: 'Distributed systems',
+    description:
+      'A three-node, crash-recoverable key-value store built from scratch to make Raft’s hardest failure modes observable and testable.',
+    result: '1,000',
+    unit: 'seeded fault scenarios',
+    evidence:
+      'Exercised partitions, crash/restart, duplicate delivery, and recovery. A separate local WSL2 live-cluster run observed 186 ms failover.',
+    details: [
+      'Majority commits and linearizable reads',
+      'Conflict-hint log repair and snapshots',
+      'C11/JNI write-ahead log with CRC32',
+      'Torn-tail recovery and fault injection',
     ],
-    tags: ['HTML', 'CSS', 'JavaScript', 'GitHub', 'Firebase'],
+    stack: ['Java', 'C11', 'JNI', 'Python', 'Docker'],
+    slug: 'raftkv',
+    href: 'https://github.com/EesherJ39/raft-kv',
+    accent: 'amber',
+  },
+  {
+    number: '03',
+    name: 'SyncLab',
+    eyebrow: 'Local-first software',
+    description:
+      'An encrypted collaborative editor that keeps accepting edits offline, converges after reconnect, and keeps document contents opaque to the relay.',
+    result: '250K',
+    unit: 'replica-operation observations',
+    evidence:
+      '200 randomized trials × 250 operations × five replicas. Temporary message loss and duplicates are followed by an anti-entropy pass that checks replica convergence.',
+    details: [
+      'Operation-based CRDT and anti-entropy',
+      'Persistent encrypted outbox replay',
+      'Ordered ASP.NET Core WebSocket relay',
+      'Out-of-order and duplicate delivery tests',
+    ],
+    stack: ['C#', 'ASP.NET Core', 'React', 'TypeScript'],
+    slug: 'synclab',
+    href: 'https://github.com/EesherJ39/SyncLab',
+    accent: 'mint',
   },
 ];
 
-const skills = [
-  ['Languages', 'Python, C, C++, Java, C#, TypeScript, JavaScript, SQL'],
-  ['Frameworks', 'React, ASP.NET Core, Node.js, REST APIs, WebSockets'],
-  ['Testing and delivery', 'Jest, Playwright, Vitest, GitHub Actions, AWS ECS, Docker, Git'],
-  ['Data and systems', 'PostgreSQL, SQLite, Redis, Prometheus, Linux, CMake'],
+const capabilities = [
+  {
+    title: 'Distributed systems',
+    text: 'Raft consensus, CRDTs, replication, recovery, linearizability, and failure-oriented design.',
+  },
+  {
+    title: 'Backend & data',
+    text: 'Node.js, ASP.NET Core, REST, WebSockets, PostgreSQL, SQLite, Redis, indexing, and observability.',
+  },
+  {
+    title: 'Delivery & quality',
+    text: 'Docker, Linux, GitHub Actions, fault injection, load testing, Jest, Vitest, and clear engineering docs.',
+  },
 ];
-
-function Tags({ items, label }: { items: string[]; label: string }) {
-  return (
-    <ul className="tags" aria-label={label}>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
-}
 
 export default function Home() {
   return (
-    <>
-      <a className="skip-link" href="#content">
-        Skip to content
+    <main>
+      <a className="skip-link" href="#work">
+        Skip to selected work
       </a>
-      <div className="shell">
-        <header className="side">
-          <div>
-            <h1>
-              <a href="/">Eesher Janda</a>
-            </h1>
-            <p className="side-role">Software engineer · backend and distributed systems</p>
-            <p className="side-pitch">
-              I build systems that have to stay correct when things fail, and then
-              I try to break them.
-            </p>
-            <p className="status">
-              <span className="status-dot" aria-hidden="true" />
-              Open to internships and co-ops
-            </p>
-            <SectionNav />
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="Eesher Janda, home">
+          EJ<span>.</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+        </nav>
+        <a
+          className="header-cta"
+          href="/Eesher_Janda_Resume.pdf"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View résumé <ArrowUpRight size={15} aria-hidden="true" />
+        </a>
+      </header>
+
+      <section className="hero" id="top">
+        <div className="hero-copy">
+          <p className="kicker">
+            <span /> Software engineer · Toronto, Canada
+          </p>
+          <h1>
+            Eesher Janda
+            <span className="hero-specialty">
+              Software engineering.
+              <br />
+              <em>Systems & developer tools.</em>
+            </span>
+          </h1>
+          <p className="hero-lede">
+            I build developer tools and distributed systems, with a focus on
+            reliability and performance. My work spans CI failure analysis,
+            crash-recoverable storage, and offline collaboration.
+          </p>
+          <p className="hero-education">
+            University of Guelph · Computing, Computer Science · Business minor · April 2028
+          </p>
+          <p className="availability">
+            Seeking software engineering internships & co-ops
+          </p>
+          <div className="hero-actions">
+            <a className="button primary" href="#work">
+              Selected work <ArrowDown size={16} aria-hidden="true" />
+            </a>
+            <a
+              className="button secondary"
+              href="/Eesher_Janda_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View résumé <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+            <a
+              className="button secondary"
+              href="https://github.com/EesherJ39"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Code size={17} aria-hidden="true" /> GitHub
+            </a>
           </div>
-          <ul className="profiles" aria-label="Profiles and contact">
-            <li>
-              <a href={github} aria-label="GitHub">
-                <GitHubIcon className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href={linkedin} aria-label="LinkedIn">
-                <LinkedInIcon className="icon" />
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${email}`} aria-label={`Email ${email}`}>
-                <MailIcon className="icon" />
-              </a>
-            </li>
-            <li>
-              <a className="button" href="/Eesher_Janda_Resume.pdf">
-                Résumé <span className="button-meta">PDF</span>
-              </a>
-            </li>
-          </ul>
-        </header>
+        </div>
+        <aside
+          className="hero-product"
+          aria-label="Interactive TriageCI analyzer"
+        >
+          <TriageDemo compact />
+        </aside>
+      </section>
 
-        <main className="content" id="content">
-          <section id="about" aria-label="About">
+      <section className="proof-strip" aria-label="Profile highlights">
+        <div>
+          <strong>10 hrs/wk</strong>
+          <span>staff time saved · Codentrel internship</span>
+        </div>
+        <div>
+          <strong>375K</strong>
+          <span>CI observations · local stress tests</span>
+        </div>
+        <div>
+          <strong>1,000</strong>
+          <span>seeded Raft fault scenarios</span>
+        </div>
+        <div>
+          <strong>12s → 6s</strong>
+          <span>report response time · Codentrel internship</span>
+        </div>
+      </section>
+
+      <section className="section work-section" id="work">
+        <div className="section-heading">
+          <p className="section-index">01 / Selected work</p>
+          <h2>
+            Built. Tested.
+            <br />
+            Explained.
+          </h2>
+          <p>
+            Three engineering projects, with interactive demonstrations, design
+            decisions, and reproducible test results.
+          </p>
+        </div>
+        <div className="project-list">
+          {projects.map((project) => (
+            <article
+              className={`project-card ${project.accent}`}
+              key={project.name}
+            >
+              <div className="project-topline">
+                <span>{project.number}</span>
+                <span>{project.eyebrow}</span>
+                <Network size={18} aria-hidden="true" />
+              </div>
+              <div className="project-grid">
+                <div className="project-copy">
+                  <h3>{project.name}</h3>
+                  <p>{project.description}</p>
+                  <ul>
+                    {project.details.map((detail) => (
+                      <li key={detail}>
+                        <CircleCheck size={15} aria-hidden="true" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="project-proof">
+                  <p className="proof-label">Measured result</p>
+                  <strong>{project.result}</strong>
+                  <span>{project.unit}</span>
+                  <p>{project.evidence}</p>
+                </div>
+              </div>
+              <div className="project-footer">
+                <div className="stack-list">
+                  {project.stack.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  <a href={`/projects/${project.slug}`}>
+                    Explore project{' '}
+                    <ArrowUpRight size={16} aria-hidden="true" />
+                  </a>
+                  <a href={project.href} target="_blank" rel="noreferrer">
+                    Source code ↗
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section experience-section" id="experience">
+        <div className="section-heading compact">
+          <p className="section-index">02 / Experience</p>
+          <h2>Engineering with impact.</h2>
+        </div>
+        <article className="experience-card">
+          <div className="experience-meta">
+            <p>Codentrel</p>
+            <span>Software Engineering Intern</span>
+            <time>May — Aug 2026</time>
+          </div>
+          <div className="experience-content">
+            <h3>Turning operational data into faster decisions.</h3>
             <p>
-              I’m a computer science student at the <strong>University of Guelph</strong>,
-              graduating in April 2028. I mostly build backend and distributed
-              systems, and I spend a lot of that time trying to break them, like
-              killing a Raft leader halfway through a write and checking that no
-              committed data goes missing.
+              Contributed to the development of a custom CRM with a React dashboard
+              for Codentrel&apos;s modular workforce platform, serving{' '}
+              <strong>15+ internal users</strong>,
+              automating <strong>10 workflows</strong>, and consolidating{' '}
+              <strong>50+ KPIs</strong>. The system cut reporting effort by{' '}
+              <strong>75%</strong> and saved{' '}
+              <strong>10 staff hours per week</strong>.
             </p>
-            <p>
-              In summer 2026 I interned at <strong>Codentrel</strong> in Mississauga,
-              on the reporting side of their internal CRM. I made the dashboard
-              twice as fast and replaced its 30-second polling with live updates.
+            <p className="ownership">
+              Resolved <strong>50+ issues reported during beta testing</strong>,
+              added live updates, and shipped drill-down reports, filters, and exports.
+              Built <strong>60+ Playwright test suites</strong> into GitHub
+              Actions and AWS ECS delivery, preventing{' '}
+              <strong>2 defects from reaching production</strong>.
             </p>
-            <p>
-              Below are three systems I built in 2026. Each one has a full write-up
-              with a demo you can run in the browser, and every number comes with
-              the test that produced it.
-            </p>
-          </section>
-
-          <section id="projects" aria-labelledby="projects-title">
-            <h2 className="section-title" id="projects-title">
-              Projects
-            </h2>
-            <ol className="cards">
-              {projectOrder.map((slug) => {
-                const project = projects[slug];
-                return (
-                  <li className="card" key={slug}>
-                    <article aria-labelledby={`${slug}-title`}>
-                      <div className="card-figure">{figures[slug]}</div>
-                      <h3 id={`${slug}-title`}>
-                        <a className="card-link" href={`/projects/${slug}`}>
-                          {project.name}
-                          <ArrowIcon className="arrow" />
-                        </a>
-                      </h3>
-                      <p className="card-tagline">{project.tagline}</p>
-                      <dl className="card-facts">
-                        {project.facts.map((fact) => (
-                          <div key={fact.label}>
-                            <dt>{fact.label}</dt>
-                            <dd>{fact.value}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                      <div className="card-foot">
-                        <Tags items={project.stack} label={`${project.name} stack`} />
-                        <a className="card-code" href={repoUrl(slug)}>
-                          <GitHubIcon className="icon" />
-                          Code
-                        </a>
-                      </div>
-                    </article>
-                  </li>
-                );
-              })}
-            </ol>
-          </section>
-
-          <section id="experience" aria-labelledby="experience-title">
-            <h2 className="section-title" id="experience-title">
-              Experience
-            </h2>
-            <ol className="timeline">
-              {roles.map((role) => (
-                <li className="entry" key={role.org}>
-                  <p className="entry-dates">{role.dates}</p>
-                  <div>
-                    <h3>
-                      {role.title} <span className="at">·</span> {role.org}
-                    </h3>
-                    <p className="entry-place">{role.place}</p>
-                    <ul className="entry-points">
-                      {role.points.map((point) => (
-                        <li key={point.slice(0, 24)}>{point}</li>
-                      ))}
-                    </ul>
-                    <Tags items={role.tags} label={`${role.org} tools`} />
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section id="education" aria-labelledby="education-title">
-            <h2 className="section-title" id="education-title">
-              Education
-            </h2>
-            <div className="entry">
-              <p className="entry-dates">Class of 2028</p>
+            <div className="impact-grid">
               <div>
-                <h3>
-                  Bachelor of Computing, Computer Science{' '}
-                  <span className="at">·</span> University of Guelph
-                </h3>
-                <p className="entry-place">Minor in Business · Guelph, ON</p>
-                <p>
-                  Dean’s Honour List in Fall 2024 and Winter 2025. Coursework in
-                  data structures and algorithms, operating systems, distributed
-                  systems and software engineering.
-                </p>
+                <strong>125%</strong>
+                <span>
+                  higher throughput
+                  <br />8 → 18 req/s
+                </span>
+              </div>
+              <div>
+                <strong>50%</strong>
+                <span>
+                  faster report response
+                  <br />
+                  12s → 6s
+                </span>
+              </div>
+              <div>
+                <strong>&lt;500ms</strong>
+                <span>
+                  live refresh
+                  <br />
+                  via WebSockets
+                </span>
+              </div>
+              <div>
+                <strong>2</strong>
+                <span>
+                  defects caught
+                  <br />
+                  before production
+                </span>
               </div>
             </div>
-            <dl className="skills">
-              {skills.map(([group, items]) => (
-                <div key={group}>
-                  <dt>{group}</dt>
-                  <dd>{items}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-
-          <footer className="foot">
+          </div>
+        </article>
+        <article className="experience-card">
+          <div className="experience-meta">
+            <p>Google Developer Groups on Campus</p>
+            <span>Volunteer &amp; Workshop Mentor</span>
+            <time>Sep 2024 — Present</time>
+          </div>
+          <div className="experience-content">
+            <h3>Helping students build for the web.</h3>
             <p>
-              The quickest way to reach me is email:{' '}
-              <a href={`mailto:${email}`}>{email}</a>. I’m based in Toronto.
+              Coordinated <strong>10 hands-on workshops</strong> for
+              approximately <strong>100 participants</strong>, covering web
+              fundamentals, APIs, GitHub, and deployment.
             </p>
-            <p className="foot-small">
-              Built with React and vinext, set in Inter and JetBrains Mono, and
-              served from a Docker container on my own Ubuntu server.
+            <p className="ownership">
+              Guided <strong>5 participants</strong> through building and deploying
+              personal portfolio websites, providing live debugging and one-on-one
+              support in HTML, CSS, JavaScript, GitHub, and Firebase.
             </p>
-          </footer>
-        </main>
-      </div>
-    </>
+            <div className="impact-grid compact-impact-grid">
+              <div>
+                <strong>10</strong>
+                <span>web-development workshops coordinated</span>
+              </div>
+              <div>
+                <strong>~100</strong>
+                <span>participants reached</span>
+              </div>
+              <div>
+                <strong>5</strong>
+                <span>portfolio builders mentored</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section className="section about-section" id="about">
+        <div className="about-intro">
+          <p className="section-index">03 / About</p>
+          <h2>Beyond the code.</h2>
+          <p>
+            I study Computer Science with a minor in Business at the University
+            of Guelph, where I’ve earned Dean’s Honour List recognition. I’m
+            most drawn to software where correctness, performance, and clear
+            reasoning all matter.
+          </p>
+          <p>
+            As a volunteer with{' '}
+            <strong>Google Developer Groups on Campus at Guelph</strong>, I help
+            coordinate web-development workshops and mentor participants as
+            they build and deploy personal portfolio websites.
+          </p>
+          <p>
+            I enjoy the full engineering process: understanding the problem,
+            implementing a solution, and testing the assumptions behind it.
+          </p>
+        </div>
+        <div className="capability-list">
+          {capabilities.map((capability, index) => (
+            <article key={capability.title}>
+              <span>0{index + 1}</span>
+              <div>
+                <h3>{capability.title}</h3>
+                <p>{capability.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-section" id="contact">
+        <p className="section-index">04 / Contact</p>
+        <h2>Let’s build something useful.</h2>
+        <p>
+          I’m looking for software engineering internships and co-ops,
+          especially in backend systems, developer tools, and full-stack
+          engineering. Based in Toronto, Canada.
+        </p>
+        <div className="contact-actions">
+          <a className="button light" href="mailto:eeshersjanda@gmail.com">
+            <Mail size={17} aria-hidden="true" /> Email me
+          </a>
+          <a
+            href="https://www.linkedin.com/in/eesherjanda/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ContactRound size={17} aria-hidden="true" /> LinkedIn
+          </a>
+          <a
+            href="https://github.com/EesherJ39"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Code size={17} aria-hidden="true" /> GitHub
+          </a>
+        </div>
+      </section>
+      <footer>
+        <p>Designed and built by Eesher Janda.</p>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </main>
   );
 }
