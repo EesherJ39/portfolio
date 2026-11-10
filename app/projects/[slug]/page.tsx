@@ -9,6 +9,7 @@ import {
   type ProjectSlug,
 } from '@/lib/projects';
 import { TriageDemo, SyncDemo, RaftDemo } from '@/app/project-demos';
+import { GitHubIcon } from '@/app/icons';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -57,19 +58,38 @@ export default async function ProjectPage({ params }: Props) {
         Skip to the demo
       </a>
       <nav className="topbar" aria-label="Site">
-        <a href="/">Eesher Janda</a>
-        <span>
-          <a href="/#projects">Projects</a>
-          <a href="/Eesher_Janda_Resume.pdf">Résumé</a>
-        </span>
+        <div className="topbar-inner">
+          <a className="topbar-home" href="/">
+            Eesher Janda
+          </a>
+          <span>
+            <a href="/#projects">Projects</a>
+            <a href="/#experience">Experience</a>
+            <a href="/Eesher_Janda_Resume.pdf">Résumé</a>
+          </span>
+        </div>
       </nav>
       <main className="page writeup">
         <header className="writeup-head">
+          <a className="back" href="/#projects">
+            <span aria-hidden="true">←</span> All projects
+          </a>
           <h1>{project.name}</h1>
-          <p className="intro-lede">{project.tagline}</p>
-          <p className="meta">
-            Personal project, {project.year} · {project.stack.join(', ')} ·{' '}
-            <a href={repoUrl(slug)}>Code on GitHub</a>
+          <p className="writeup-lede">{project.tagline}</p>
+          <p className="meta">Personal project · {project.year}</p>
+          <ul className="tags" aria-label={`${project.name} stack`}>
+            {project.stack.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="actions">
+            <a className="button primary" href="#demo">
+              Try the demo
+            </a>
+            <a className="button" href={repoUrl(slug)}>
+              <GitHubIcon className="icon" />
+              Code on GitHub
+            </a>
           </p>
         </header>
 
@@ -113,12 +133,14 @@ export default async function ProjectPage({ params }: Props) {
               </li>
             ))}
           </ol>
-          {project.decisions.map((decision) => (
-            <div className="decision" key={decision.title}>
-              <h3>{decision.title}</h3>
-              <p>{decision.text}</p>
-            </div>
-          ))}
+          <div className="decisions">
+            {project.decisions.map((decision) => (
+              <div className="decision" key={decision.title}>
+                <h3>{decision.title}</h3>
+                <p>{decision.text}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section aria-labelledby="testing">

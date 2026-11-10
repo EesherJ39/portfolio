@@ -7,19 +7,21 @@ experience, education, skills, contact. Each project has a write-up at
 
 ## Design rules
 
-The November 2026 redesign replaced a template-looking layout (eyebrow labels,
-stat strips, icon cards, numbered section labels, Geist on a cream background,
-shadcn components) with a deliberately plain one. Keep to these rules when changing it:
+The current layout follows the pattern used by well-known engineer portfolios
+such as Brittany Chiang's: on wide screens a sticky left column (name, role,
+one-line pitch, section nav, profile links) and a scrolling right column
+(about, project cards, experience timeline, education). Below 64rem it becomes
+one column and the section nav is hidden. Keep to these rules when changing it:
 
-- **Type:** IBM Plex Sans for text, IBM Plex Mono for numbers, code and data.
-  Nothing else.
-- **Colour:** white paper and near-black ink. The only colours are signals, and
-  they mean the same thing everywhere: green means passed or committed, red means
-  failed, amber means flaky or offline. Tokens live at the top of
-  `app/globals.css`, with a dark-mode set under `prefers-color-scheme`.
-- **Structure:** hairline rules between sections, no cards with shadows, no
-  icons, no badges or pills, no scroll animations, and no coloured left
-  borders. Radius is 4 to 6 px.
+- **Type:** Inter for text, JetBrains Mono for numbers, code and data.
+- **Colour:** dark only. Tokens live at the top of `app/globals.css`. There is
+  one accent (`--accent`, a soft blue) for links, tags, focus and the Raft
+  leader. Green, red and amber are reserved for signals and mean the same thing
+  everywhere: passed or committed, failed, flaky or offline.
+- **Structure:** project and experience entries are cards that only get a
+  background and border on hover. The whole project card is a link to the
+  write-up; the GitHub link sits above it. Radius is 8 to 10 px. No scroll
+  animations.
 - **Figures, not decoration:** the three home-page figures (`app/figures.tsx`)
   are computed from real project code at build time. The TriageCI labels come
   from `analyze()`, and the SyncLab text is real CRDT output. The Raft timeline

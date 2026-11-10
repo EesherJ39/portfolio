@@ -1,5 +1,7 @@
 import { projects, projectOrder, repoUrl } from '@/lib/projects';
 import { RaftFigure, SyncFigure, TriageFigure } from './figures';
+import { ArrowIcon, GitHubIcon, LinkedInIcon, MailIcon } from './icons';
+import { SectionNav } from './section-nav';
 
 const email = 'eeshersjanda@gmail.com';
 const linkedin = 'https://www.linkedin.com/in/eesherjanda/';
@@ -11,189 +13,225 @@ const figures = {
   synclab: <SyncFigure />,
 };
 
+const roles = [
+  {
+    dates: 'May – Aug 2026',
+    title: 'Software Engineering Intern',
+    org: 'Codentrel',
+    place: 'Mississauga, ON',
+    points: [
+      'Worked on a React reporting dashboard for Codentrel’s internal CRM. Automating the recurring reports saved the team about 10 hours a week.',
+      'Removed duplicate PostgreSQL queries from the reporting path, which took it from 8 to 18 requests per second and cut response time from 12 seconds to 6.',
+      'Replaced the dashboard’s 30-second polling with live updates over WebSockets and Redis. New data now shows up in under half a second.',
+      'Fixed 50+ issues from beta testing, and added drill-down reports, date filters and CSV export.',
+      'Set up a CI gate in GitHub Actions with 60+ Playwright suites and automated deploys to AWS ECS. It caught two bugs before they reached production.',
+    ],
+    tags: ['React', 'PostgreSQL', 'WebSockets', 'Redis', 'Playwright', 'AWS ECS'],
+  },
+  {
+    dates: 'Sep 2024 – Now',
+    title: 'Volunteer and Workshop Mentor',
+    org: 'Google Developer Groups on Campus, University of Guelph',
+    place: 'Guelph, ON',
+    points: [
+      'Helped run 10 hands-on web development workshops for about 100 students, covering frontend basics, APIs, GitHub and deployment.',
+      'Worked one-on-one with five students to build and deploy their own portfolio sites.',
+    ],
+    tags: ['HTML', 'CSS', 'JavaScript', 'GitHub', 'Firebase'],
+  },
+];
+
 const skills = [
-  ['Languages', 'Python, C, C++, Java, C#, TypeScript and JavaScript, SQL'],
+  ['Languages', 'Python, C, C++, Java, C#, TypeScript, JavaScript, SQL'],
   ['Frameworks', 'React, ASP.NET Core, Node.js, REST APIs, WebSockets'],
   ['Testing and delivery', 'Jest, Playwright, Vitest, GitHub Actions, AWS ECS, Docker, Git'],
   ['Data and systems', 'PostgreSQL, SQLite, Redis, Prometheus, Linux, CMake'],
 ];
 
+function Tags({ items, label }: { items: string[]; label: string }) {
+  return (
+    <ul className="tags" aria-label={label}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Home() {
   return (
     <>
-      <a className="skip-link" href="#projects">
-        Skip to projects
+      <a className="skip-link" href="#content">
+        Skip to content
       </a>
-      <main className="page">
-        <header className="intro">
-          <h1>Eesher Janda</h1>
-          <p className="intro-lede">
-            I’m a computer science student at the University of Guelph,
-            graduating in April 2028. I mostly build backend and distributed
-            systems, and I spend a lot of that time trying to break them, like
-            killing a Raft leader halfway through a write and checking that no
-            committed data goes missing.
-          </p>
-          <p>
-            In summer 2026 I interned at Codentrel in Mississauga, working on the
-            reporting side of their internal CRM. I’m looking for a software
-            engineering internship or co-op.
-          </p>
-          <ul className="intro-links" aria-label="Contact and profiles">
+      <div className="shell">
+        <header className="side">
+          <div>
+            <h1>
+              <a href="/">Eesher Janda</a>
+            </h1>
+            <p className="side-role">Software engineer · backend and distributed systems</p>
+            <p className="side-pitch">
+              I build systems that have to stay correct when things fail, and then
+              I try to break them.
+            </p>
+            <p className="status">
+              <span className="status-dot" aria-hidden="true" />
+              Open to internships and co-ops
+            </p>
+            <SectionNav />
+          </div>
+          <ul className="profiles" aria-label="Profiles and contact">
             <li>
-              <a href="/Eesher_Janda_Resume.pdf">Résumé (PDF)</a>
+              <a href={github} aria-label="GitHub">
+                <GitHubIcon className="icon" />
+              </a>
             </li>
             <li>
-              <a href={github}>GitHub</a>
+              <a href={linkedin} aria-label="LinkedIn">
+                <LinkedInIcon className="icon" />
+              </a>
             </li>
             <li>
-              <a href={linkedin}>LinkedIn</a>
+              <a href={`mailto:${email}`} aria-label={`Email ${email}`}>
+                <MailIcon className="icon" />
+              </a>
             </li>
             <li>
-              <a href={`mailto:${email}`}>{email}</a>
+              <a className="button" href="/Eesher_Janda_Resume.pdf">
+                Résumé <span className="button-meta">PDF</span>
+              </a>
             </li>
           </ul>
         </header>
 
-        <section id="projects" aria-labelledby="projects-title">
-          <div className="section-head">
-            <h2 id="projects-title">Projects</h2>
+        <main className="content" id="content">
+          <section id="about" aria-label="About">
             <p>
-              Three things I built in 2026. Each has a write-up with a demo you
-              can use in the browser.
+              I’m a computer science student at the <strong>University of Guelph</strong>,
+              graduating in April 2028. I mostly build backend and distributed
+              systems, and I spend a lot of that time trying to break them, like
+              killing a Raft leader halfway through a write and checking that no
+              committed data goes missing.
             </p>
-          </div>
-          {projectOrder.map((slug) => {
-            const project = projects[slug];
-            return (
-              <article className="project" key={slug} aria-labelledby={`${slug}-title`}>
-                <div className="project-text">
-                  <h3 id={`${slug}-title`}>
-                    <a href={`/projects/${slug}`}>{project.name}</a>
-                  </h3>
-                  <p className="project-tagline">{project.tagline}</p>
-                  <p>{project.summary}</p>
-                  <p className="stack">{project.stack.join(' · ')}</p>
-                  <p className="project-links">
-                    <a href={`/projects/${slug}`}>
-                      Write-up and demo<span aria-hidden="true"> →</span>
-                    </a>
-                    <a href={repoUrl(slug)}>Code on GitHub</a>
-                  </p>
-                </div>
-                {figures[slug]}
-              </article>
-            );
-          })}
-        </section>
-
-        <section id="experience" aria-labelledby="experience-title">
-          <div className="section-head">
-            <h2 id="experience-title">Experience</h2>
-          </div>
-          <article className="role">
-            <div className="role-head">
-              <h3>Codentrel</h3>
-              <p>Software Engineering Intern · Mississauga, ON</p>
-              <p className="dates">May–Aug 2026</p>
-            </div>
-            <ul>
-              <li>
-                Worked on a React reporting dashboard for Codentrel’s internal
-                CRM. Automating the recurring reports saved the team about 10
-                hours a week.
-              </li>
-              <li>
-                Removed duplicate PostgreSQL queries from the reporting path,
-                which took it from 8 to 18 requests per second and cut response
-                time from 12 seconds to 6.
-              </li>
-              <li>
-                Replaced the dashboard’s 30-second polling with live updates over
-                WebSockets and Redis. New data now shows up in under half a
-                second.
-              </li>
-              <li>
-                Fixed 50+ issues from beta testing, and added drill-down reports,
-                date filters and CSV export.
-              </li>
-              <li>
-                Set up a CI gate in GitHub Actions with 60+ Playwright suites and
-                automated deploys to AWS ECS. It caught two bugs before they
-                reached production.
-              </li>
-            </ul>
-          </article>
-          <article className="role">
-            <div className="role-head">
-              <h3>Google Developer Groups on Campus, University of Guelph</h3>
-              <p>Volunteer workshop mentor · Guelph, ON</p>
-              <p className="dates">Sep 2024–present</p>
-            </div>
-            <ul>
-              <li>
-                Helped run 10 hands-on web development workshops for about 100
-                students, covering frontend basics, APIs, GitHub and deployment.
-              </li>
-              <li>
-                Worked one-on-one with five students to build and deploy their
-                own portfolio sites.
-              </li>
-            </ul>
-          </article>
-        </section>
-
-        <section id="education" aria-labelledby="education-title">
-          <div className="section-head">
-            <h2 id="education-title">Education</h2>
-          </div>
-          <article className="role">
-            <div className="role-head">
-              <h3>University of Guelph</h3>
-              <p>Bachelor of Computing, Computer Science · Minor in Business</p>
-              <p className="dates">Graduating April 2028</p>
-            </div>
             <p>
-              Dean’s Honour List in Fall 2024 and Winter 2025. Courses include
-              data structures and algorithms, operating systems, distributed
-              systems and software engineering.
+              In summer 2026 I interned at <strong>Codentrel</strong> in Mississauga,
+              on the reporting side of their internal CRM. I made the dashboard
+              twice as fast and replaced its 30-second polling with live updates.
             </p>
-          </article>
-        </section>
+            <p>
+              Below are three systems I built in 2026. Each one has a full write-up
+              with a demo you can run in the browser, and every number comes with
+              the test that produced it.
+            </p>
+          </section>
 
-        <section id="skills" aria-labelledby="skills-title">
-          <div className="section-head">
-            <h2 id="skills-title">Skills</h2>
-          </div>
-          <dl className="skills">
-            {skills.map(([group, items]) => (
-              <div key={group}>
-                <dt>{group}</dt>
-                <dd>{items}</dd>
+          <section id="projects" aria-labelledby="projects-title">
+            <h2 className="section-title" id="projects-title">
+              Projects
+            </h2>
+            <ol className="cards">
+              {projectOrder.map((slug) => {
+                const project = projects[slug];
+                return (
+                  <li className="card" key={slug}>
+                    <article aria-labelledby={`${slug}-title`}>
+                      <div className="card-figure">{figures[slug]}</div>
+                      <h3 id={`${slug}-title`}>
+                        <a className="card-link" href={`/projects/${slug}`}>
+                          {project.name}
+                          <ArrowIcon className="arrow" />
+                        </a>
+                      </h3>
+                      <p className="card-tagline">{project.tagline}</p>
+                      <dl className="card-facts">
+                        {project.facts.map((fact) => (
+                          <div key={fact.label}>
+                            <dt>{fact.label}</dt>
+                            <dd>{fact.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                      <div className="card-foot">
+                        <Tags items={project.stack} label={`${project.name} stack`} />
+                        <a className="card-code" href={repoUrl(slug)}>
+                          <GitHubIcon className="icon" />
+                          Code
+                        </a>
+                      </div>
+                    </article>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+
+          <section id="experience" aria-labelledby="experience-title">
+            <h2 className="section-title" id="experience-title">
+              Experience
+            </h2>
+            <ol className="timeline">
+              {roles.map((role) => (
+                <li className="entry" key={role.org}>
+                  <p className="entry-dates">{role.dates}</p>
+                  <div>
+                    <h3>
+                      {role.title} <span className="at">·</span> {role.org}
+                    </h3>
+                    <p className="entry-place">{role.place}</p>
+                    <ul className="entry-points">
+                      {role.points.map((point) => (
+                        <li key={point.slice(0, 24)}>{point}</li>
+                      ))}
+                    </ul>
+                    <Tags items={role.tags} label={`${role.org} tools`} />
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section id="education" aria-labelledby="education-title">
+            <h2 className="section-title" id="education-title">
+              Education
+            </h2>
+            <div className="entry">
+              <p className="entry-dates">Class of 2028</p>
+              <div>
+                <h3>
+                  Bachelor of Computing, Computer Science{' '}
+                  <span className="at">·</span> University of Guelph
+                </h3>
+                <p className="entry-place">Minor in Business · Guelph, ON</p>
+                <p>
+                  Dean’s Honour List in Fall 2024 and Winter 2025. Coursework in
+                  data structures and algorithms, operating systems, distributed
+                  systems and software engineering.
+                </p>
               </div>
-            ))}
-          </dl>
-        </section>
+            </div>
+            <dl className="skills">
+              {skills.map(([group, items]) => (
+                <div key={group}>
+                  <dt>{group}</dt>
+                  <dd>{items}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
 
-        <footer className="contact" id="contact">
-          <h2>Contact</h2>
-          <p>
-            Email is the best way to reach me:{' '}
-            <a href={`mailto:${email}`}>{email}</a>. I’m based in Toronto.
-          </p>
-          <ul className="intro-links" aria-label="Profiles">
-            <li>
-              <a href="/Eesher_Janda_Resume.pdf">Résumé (PDF)</a>
-            </li>
-            <li>
-              <a href={github}>GitHub</a>
-            </li>
-            <li>
-              <a href={linkedin}>LinkedIn</a>
-            </li>
-          </ul>
-        </footer>
-      </main>
+          <footer className="foot">
+            <p>
+              The quickest way to reach me is email:{' '}
+              <a href={`mailto:${email}`}>{email}</a>. I’m based in Toronto.
+            </p>
+            <p className="foot-small">
+              Built with React and vinext, set in Inter and JetBrains Mono, and
+              served from a Docker container on my own Ubuntu server.
+            </p>
+          </footer>
+        </main>
+      </div>
     </>
   );
 }

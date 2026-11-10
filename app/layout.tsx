@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from 'next';
-import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
-const sans = IBM_Plex_Sans({
+const sans = Inter({
   variable: '--font-sans',
   subsets: ['latin'],
   display: 'swap',
 });
 
-const mono = IBM_Plex_Mono({
+const mono = JetBrains_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -48,10 +48,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#121417' },
-  ],
+  themeColor: '#0b0d12',
+  colorScheme: 'dark',
 };
 
 export default function RootLayout({
