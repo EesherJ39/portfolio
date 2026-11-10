@@ -8,6 +8,8 @@
 - After a resume change, compile, inspect the rendered PDF, and run the tests.
   One-page/text/overflow build checks do not replace visual review.
 - Push the source to main and deploy before claiming the public resume updated.
-  The Ubuntu polling deployment is not known to be enabled; do not assume it is.
+  The Ubuntu polling deployment (eesher-portfolio-deploy.timer) is enabled and
+  deploys new commits on main within about a minute; check deployed.json on the
+  server to confirm a given commit is live.
 - Old exported PDFs/LaTeX files outside this repository are snapshots, not masters.
 - Do not rewrite unrelated portfolio text to mirror resume edits unless requested.

@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { analyze, updateStats, emptyStats } from '../lib/demos/triage.ts';
 import { SyncSession } from '../lib/demos/sync.ts';
-import { projects, evidenceUrl } from '../lib/projects.ts';
+import { sampleHistories } from '../lib/demos/samples.ts';
+import { projects, projectOrder, evidenceUrl } from '../lib/projects.ts';
 
 test('TriageCI identifies stable, intermittent, and regression samples', () => {
   assert.equal(analyze(Array(8).fill('passed')).state, 'stable');
@@ -88,10 +89,29 @@ test('Demo edit operations are bounded', () => {
   session.append(1, 'ignored');
   assert.equal(session.operations, 600);
 });
+test('Home page figure labels come from the analyzer and match the caption', () => {
+  const states = sampleHistories.map((test) => analyze(test.runs).state);
+  assert.deepEqual(states, ['flaky', 'regression', 'stable']);
+});
+
+test('SyncLab figure shows divergence offline and a match after reconnect', () => {
+  const session = new SyncSession();
+  session.disconnect();
+  session.append(0, ' Typed on A.');
+  session.append(1, ' Typed on B.');
+  const [a, b] = session.snapshot().texts;
+  assert.notEqual(a, b);
+  session.reconnect();
+  const merged = session.snapshot().texts;
+  assert.equal(merged[0], merged[1]);
+  assert.ok(merged[0].includes('Typed on A.') && merged[0].includes('Typed on B.'));
+});
+
 test('Every case study pins evidence to immutable project revisions', () => {
   for (const [slug, project] of Object.entries(projects)) {
-    assert.equal(project.numbers.length, 3);
-    assert.equal(project.architecture.length, 5);
+    assert.equal(project.facts.length, 3);
+    assert.equal(project.flow.length, 5);
+    assert.equal(projectOrder.filter((item) => item === slug).length, 1);
     for (const link of project.links)
       assert.match(
         evidenceUrl(slug, link.path),
@@ -112,14 +132,33 @@ test('Resume is a real PDF and portfolio preserves loopback-only hosting', () =>
   );
 });
 
+const pageSources = [
+  'app/page.tsx',
+  'app/figures.tsx',
+  'app/project-demos.tsx',
+  'app/projects/[slug]/page.tsx',
+  'app/layout.tsx',
+  'lib/projects.ts',
+];
+
 test('Case-study navigation uses native links, not the failing client router', () => {
-  for (const path of ['app/page.tsx', 'app/project-demos.tsx', 'app/projects/[slug]/page.tsx']) {
+  for (const path of pageSources) {
     const source = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
     assert.doesNotMatch(source, /from ['"]next\/link['"]|<Link\b/);
-    assert.match(source, /<a\s/);
   }
-  const demo = readFileSync(new URL('../app/project-demos.tsx', import.meta.url), 'utf8');
-  assert.match(demo, /<a className="text-link" href="\/projects\/triageci">/);
+  for (const path of ['app/page.tsx', 'app/projects/[slug]/page.tsx']) {
+    const source = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+    assert.match(source, /<a\s/);
+    assert.match(source, /href=\{`\/projects\/\$\{/);
+  }
+});
+
+test('Site copy avoids em dashes and other stock AI phrasing', () => {
+  const banned = [/—/, /\bnot just\b/i, /\bseamless/i, /\bleverag/i, /\bdelve/i, /\brobust\b/i, /\bpassionate\b/i];
+  for (const path of pageSources) {
+    const source = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
+    for (const pattern of banned) assert.doesNotMatch(source, pattern, `${path} matches ${pattern}`);
+  }
 });
 
 test('Short resume routes redirect to the canonical generated PDF', () => {

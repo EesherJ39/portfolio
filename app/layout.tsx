@@ -1,58 +1,57 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const sans = IBM_Plex_Sans({
+  variable: '--font-sans',
   subsets: ['latin'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const mono = IBM_Plex_Mono({
+  variable: '--font-mono',
   subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
 });
+
+const description =
+  'Computer science student at the University of Guelph who builds backend and distributed systems. Projects: TriageCI, RaftKV and SyncLab.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://eesherj.com'),
   alternates: { canonical: '/' },
-  title: 'Eesher Janda — Software Engineer',
-  description:
-    'Software engineer focused on distributed systems, developer infrastructure, and reliable full-stack software.',
-  applicationName: 'Eesher Janda Portfolio',
+  title: 'Eesher Janda',
+  description,
   authors: [{ name: 'Eesher Janda' }],
-  creator: 'Eesher Janda',
-  keywords: [
-    'Eesher Janda',
-    'software engineer',
-    'distributed systems',
-    'developer infrastructure',
-    'Raft',
-    'CRDT',
-    'Toronto',
-  ],
   icons: { icon: '/favicon.svg' },
   openGraph: {
     type: 'website',
-    title: 'Eesher Janda — Software Engineer',
-    description:
-      'Distributed systems, developer infrastructure, and reliable software—backed by reproducible evidence.',
+    title: 'Eesher Janda',
+    description,
     images: [
       {
         url: '/eesher-janda-social.png',
-        width: 1728,
-        height: 909,
-        alt: 'Eesher Janda — Software Engineer, Distributed Systems and Reliability',
+        width: 1200,
+        height: 630,
+        alt: 'Eesher Janda, software engineering student',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Eesher Janda — Software Engineer',
-    description:
-      'Distributed systems, developer infrastructure, and measurable engineering results.',
+    title: 'Eesher Janda',
+    description,
     images: ['/eesher-janda-social.png'],
   },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#121417' },
+  ],
 };
 
 export default function RootLayout({
@@ -62,9 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${sans.variable} ${mono.variable}`}>
         {children}
         <script
           type="application/ld+json"
@@ -73,7 +70,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Eesher Janda',
-              jobTitle: 'Software Engineer',
+              url: 'https://eesherj.com',
               email: 'mailto:eeshersjanda@gmail.com',
               affiliation: {
                 '@type': 'CollegeOrUniversity',
@@ -81,14 +78,7 @@ export default function RootLayout({
               },
               sameAs: [
                 'https://github.com/EesherJ39',
-                'https://www.linkedin.com/in/eesher-singh-janda-b8439434a',
-              ],
-              knowsAbout: [
-                'Distributed systems',
-                'Developer infrastructure',
-                'Raft consensus',
-                'CRDTs',
-                'Backend engineering',
+                'https://www.linkedin.com/in/eesherjanda/',
               ],
             }),
           }}
