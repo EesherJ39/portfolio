@@ -1,55 +1,22 @@
-<div align="center">
+# eesherj.com
 
-# Eesher Janda — Engineering Portfolio
+This is the source for my portfolio site, [eesherj.com](https://eesherj.com). It is one page about me and my work, plus a write-up for each of three projects: [TriageCI](https://eesherj.com/projects/triageci), [RaftKV](https://eesherj.com/projects/raftkv) and [SyncLab](https://eesherj.com/projects/synclab). My résumé is at [eesherj.com/Eesher_Janda_Resume.pdf](https://eesherj.com/Eesher_Janda_Resume.pdf), built from the LaTeX source in this repo.
 
-**Interactive case studies for distributed systems, developer infrastructure, and reliable software.**
+## What is on the site
 
-[![Live site](https://img.shields.io/badge/Live-eesherj.com-2455E6?logo=googlechrome&logoColor=white)](https://eesherj.com)
-[![Resume](https://img.shields.io/badge/Resume-current_PDF-111827?logo=readthedocs&logoColor=white)](https://eesherj.com/Eesher_Janda_Resume.pdf)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Docker](https://img.shields.io/badge/Deploy-Docker-2496ED?logo=docker&logoColor=white)](Dockerfile)
+Each project write-up covers the problem, how it works, the decisions I made, how I tested it and what it still cannot do. Every number on the site is on my résumé or in the linked project repo, with the workload and machine it was measured on. I did not rerun any benchmarks for the website. Links to evidence are pinned to the project commit I checked the write-up against.
 
-</div>
+Each write-up also has a small demo that runs in your browser:
 
-This repository powers [eesherj.com](https://eesherj.com), a portfolio built around engineering evidence rather than a static project gallery. Each featured system includes the problem, architecture, design trade-offs, reproducible verification, and an interactive browser-safe demonstration.
+- **TriageCI** runs a copy of the real classifier on sample test histories. You can add passing or failing runs and watch the label change.
+- **SyncLab** runs the real CRDT code with two copies of a document. Disconnect them, type in both, reconnect, and they end up identical even though the queued edits are replayed out of order and twice.
+- **RaftKV** is a hand-written step-through of a leader failure. It does not run the Java cluster.
 
-## Featured case studies
+The demos make no network requests and do not store anything you type. The small figures on the home page are computed at build time from the same demo code, so the TriageCI labels and SyncLab text are real output.
 
-| Project | Engineering focus | Interactive evidence |
-|---|---|---|
-| [TriageCI](https://eesherj.com/projects/triageci) | signed CI ingestion, idempotency, backpressure, flaky-test classification | step through the analyzer's state transitions |
-| [RaftKV](https://eesherj.com/projects/raftkv) | consensus, crash recovery, snapshots, quorum-checked reads | inspect an annotated failover sequence |
-| [SyncLab](https://eesherj.com/projects/synclab) | CRDT convergence, offline replay, encryption, ordered WebSockets | reorder and duplicate operations, then verify convergence |
+## Run it
 
-The embedded demonstrations are intentionally scoped: they reuse or model the relevant algorithms without pretending to run the projects' full distributed backends in the visitor's browser. Their boundaries and pinned source revisions are documented in [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md).
-
-## Architecture
-
-```mermaid
-flowchart LR
-    V[Visitor] --> N[React 19 + vinext]
-    N --> C[Case-study routes]
-    C --> D[Browser-safe demos]
-    N --> R[Generated resume PDF]
-    T[LaTeX source of truth] --> B[Validated resume build]
-    B --> R
-    N --> W[Production server bundle]
-    W --> X[Docker on Ubuntu]
-    X --> P[Loopback reverse-proxy target]
-```
-
-## Engineering highlights
-
-- Three server-rendered project case studies with working interactive models.
-- Source-pinned project evidence, measurement context, and explicit demonstration boundaries.
-- A single-source LaTeX résumé pipeline with one-page, text-extraction, PDF-size, link, and overflow checks.
-- Docker multi-stage builds that generate the résumé instead of committing a stale PDF.
-- A guarded Ubuntu deployment workflow with health checks, fast-forward-only updates, and rollback behavior.
-- Unit coverage for demo logic, navigation invariants, résumé validation, and deployment safety rules.
-
-## Run locally
-
-Requirements: Node.js 22.13+, pnpm 11, a supported LaTeX compiler, and Poppler utilities for résumé validation.
+You need Node.js 22.13+, pnpm 11, a LaTeX compiler and the Poppler utilities (the résumé build checks the PDF with them).
 
 ```bash
 git clone https://github.com/EesherJ39/portfolio.git
@@ -58,9 +25,9 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open the local URL shown by the development server. `pnpm dev` rebuilds the résumé before starting the site.
+Open the URL the dev server prints. `pnpm dev` rebuilds the résumé before starting the site.
 
-## Verify
+## Checks
 
 ```bash
 pnpm resume:build
@@ -70,25 +37,43 @@ node --experimental-strip-types --test tests/*.test.mjs
 pnpm build
 ```
 
-The résumé master is [`resume/Eesher_Janda_Resume.tex`](resume/Eesher_Janda_Resume.tex). Generated copies in `public/` are build artifacts; the live site and external profiles use one canonical PDF URL.
+The tests cover the demo logic, the home-page figures, the pinned evidence links, page navigation and the résumé (a one-page Letter PDF with searchable text and nothing running off the page). They also fail if an em dash or a few stock phrases show up in the site copy. The deploy script has its own tests in `deploy/test_auto_deploy.py`.
 
-## Repository map
+The résumé source is [`resume/Eesher_Janda_Resume.tex`](resume/Eesher_Janda_Resume.tex). The PDF in `public/` is generated by the build and is not checked in. When a fact changes, I update the résumé first and then the site.
 
-| Path | Responsibility |
-|---|---|
-| `app/` | homepage, project routes, interactive case-study UI |
-| `lib/projects.ts` | structured project narrative and pinned evidence links |
-| `lib/demos/` | browser-safe TriageCI, RaftKV, and SyncLab models |
-| `resume/` | canonical LaTeX source and résumé workflow |
-| `scripts/` | résumé build and structural PDF validation |
-| `tests/` | portfolio and résumé regression tests |
-| `deploy/` | guarded Ubuntu polling deployment and its test suite |
-| `docs/PORTFOLIO.md` | evidence, authorship, and demo boundaries |
+## How it is built
+
+The site is React 19 on vinext, set in IBM Plex Sans and IBM Plex Mono. Project content lives in [`lib/projects.ts`](lib/projects.ts), and the project pages are rendered from it. [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) has the design rules and the exact source revision each demo was copied from.
+
+```mermaid
+flowchart LR
+    T[resume/*.tex] --> B[Résumé build + checks]
+    B --> R[public/ PDF]
+    P[lib/projects.ts] --> S[Site build]
+    D[lib/demos/] --> S
+    R --> S
+    S --> I[Docker image]
+    I --> H[Ubuntu host, 127.0.0.1:23601]
+    H --> X[Reverse proxy + TLS]
+```
 
 ## Deployment
 
-Production runs from a multi-stage Docker image and publishes only to `127.0.0.1:23601`, leaving public TLS and routing to the host's reverse proxy. See [`deploy/README.md`](deploy/README.md) for the reviewed server workflow, operational checks, and rollback limitations.
+The site runs from a multi-stage Docker image on my own Ubuntu server. The container only listens on `127.0.0.1:23601`, and the host's reverse proxy handles TLS and routing. The server checks GitHub `main` about once a minute, builds the new image while the old container keeps running, and swaps it in only if a health check passes. If the swap fails, it tries to restore the previous container. It is a single container, so there can be a brief interruption during the swap. [`deploy/README.md`](deploy/README.md) has the full workflow and its limits.
 
-## Content and measurement policy
+## Repo map
 
-Employer source code and confidential screenshots are not included. Historical project measurements are labeled with their workload and environment; the website does not silently rerun or generalize them. Interactive demos make their reduced scope visible so visitors can distinguish executable evidence from illustration.
+| Path | What it does |
+|---|---|
+| `app/` | home page, project pages, demos and home-page figures |
+| `lib/projects.ts` | project write-ups and pinned evidence links |
+| `lib/demos/` | browser copies of the TriageCI classifier and SyncLab CRDT, plus sample data |
+| `resume/` | LaTeX résumé source |
+| `scripts/` | résumé build and PDF checks |
+| `tests/` | site and résumé tests |
+| `deploy/` | the Ubuntu auto-deploy script and its tests |
+| `docs/PORTFOLIO.md` | design rules, demo sources and their limits |
+
+## What is not here
+
+Code and screenshots from my employers are not in this repo.
