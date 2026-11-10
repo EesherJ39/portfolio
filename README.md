@@ -43,7 +43,7 @@ The résumé source is [`resume/Eesher_Janda_Resume.tex`](resume/Eesher_Janda_Re
 
 ## How it is built
 
-The site is React 19 on vinext, set in IBM Plex Sans and IBM Plex Mono. Project content lives in [`lib/projects.ts`](lib/projects.ts), and the project pages are rendered from it. [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) has the design rules and the exact source revision each demo was copied from.
+The site is React 19 on vinext, set in Inter and JetBrains Mono. On wide screens the home page keeps my name, a section nav and profile links in a sticky left column while the projects and experience scroll on the right. Project content lives in [`lib/projects.ts`](lib/projects.ts), and the project pages are rendered from it. [`docs/PORTFOLIO.md`](docs/PORTFOLIO.md) has the design rules and the exact source revision each demo was copied from.
 
 ```mermaid
 flowchart LR
